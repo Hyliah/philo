@@ -6,14 +6,19 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:07:48 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/09 23:53:00 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/11 00:39:38 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static t_bool is_numeric(char *str);
+static t_bool	is_numeric(char *str);
 
+/* 
+fonction check des infos donnees pour eviter les pb
+affiche un message en fonction
+verifiee, all good
+*/
 t_bool	is_entry_correct(int ac, char **av)
 {
 	int	i;
@@ -30,12 +35,12 @@ t_bool	is_entry_correct(int ac, char **av)
 	return (TRUE);
 }
 
-static t_bool is_numeric(char *str)
+static t_bool	is_numeric(char *str)
 {
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
 			return (FALSE);

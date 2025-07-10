@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   string_utils.c                                     :+:      :+:    :+:   */
+/*   philo_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/09 22:37:14 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 00:43:44 by hlichten         ###   ########.fr       */
+/*   Created: 2025/07/10 22:06:28 by hlichten          #+#    #+#             */
+/*   Updated: 2025/07/11 01:02:00 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_strlen(char *str)
+t_bool	philo_handler(t_philo *philo)
 {
-	int	i;
+	t_thread	*thread;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-void	ft_putstr_fd(char *s, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-	{
-		write (fd, &s[i], 1);
-		i++;
-	}
+	thread = malloc(sizeof(t_thread) * philo->parsing.nb_philo);
+	if (!thread)
+		return (printf("Error: malloc failed\n"), FALSE);
+	if (!init_threads(philo, thread))
+		return (FALSE);
+	if (!join_threads(philo, thread))
+		return (FALSE);
+	return (TRUE);
 }

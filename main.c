@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 21:30:06 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/09 23:59:33 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/11 01:00:01 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 int	main(int ac, char **av)
 {
-	t_philo philo;
+	t_philo	philo;
 
 	if (!is_entry_correct(ac, av))
 		return (1);
 	init_struct(&philo);
 	parsing_av_entry(&philo, ac, av);
+	if (philo_handler(&philo, ac))
+		return (1);
 	return (0);
 }
 
@@ -42,10 +44,10 @@ int	main(int ac, char **av)
 // pthread_mutex_lock
 // pthread_mutex_unlock
 
-
 //  timestamp_in_ms X has taken a fork
 //  timestamp_in_ms X is eating
 //  timestamp_in_ms X is sleeping
 //  timestamp_in_ms X is thinking
 //  timestamp_in_ms X died
-// Replace timestamp_in_ms with the current timestamp in milliseconds and X with the philosopher numbers
+// Replace timestamp_in_ms with the current timestamp in milliseconds 
+	//and X with the philosopher numbers

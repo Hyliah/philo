@@ -37,9 +37,12 @@ RM = rm -f
 
 vpath %.c \
 	$(SRCDIR) \
-	$(SRCDIR)/parsing \
-	$(SRCDIR)/includes \
 	$(SRCDIR)/utils \
+	$(SRCDIR)/mutex \
+	$(SRCDIR)/parsing \
+	$(SRCDIR)/threads \
+	$(SRCDIR)/includes \
+	$(SRCDIR)/philo_routine \
 	$(SRCDIR)/utils/initialization \
 	$(SRCDIR)/utils/function_utils \
 	$(SRCDIR)/utils/error_free_exit \
@@ -51,6 +54,8 @@ init.c \
 string_utils.c convert_utils.c \
 free.c \
 check_entry.c parsing_av.c \
+threads_creation.c threads_terminate.c threads_join.c \
+philo_life.c philo_handler.c\
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
