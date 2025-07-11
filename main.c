@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 21:30:06 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 01:00:01 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/11 19:00:11 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	main(int ac, char **av)
 		return (1);
 	init_struct(&philo);
 	parsing_av_entry(&philo, ac, av);
-	if (philo_handler(&philo, ac))
+	malloc_mutex_fork(&philo);
+	if (philo_handler(&philo))
 		return (1);
 	return (0);
 }
