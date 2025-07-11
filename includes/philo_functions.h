@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 17:20:31 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:07:47 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ t_bool	is_entry_correct(int ac, char **av);
 void	parsing_av_entry(t_philo *philo, int ac, char **av);
 /*THREADS & MUTEX*/
 t_bool	malloc_mutex_fork(t_philo *philo);
-t_bool	init_threads(t_philo *philo, t_thread *thread);
-t_bool	join_threads(t_philo *philo, t_thread *thread);
+int	init_threads(t_philo *philo, t_thread *thread);
+int	join_threads(t_philo *philo, t_thread *thread);
 /*PHILO_ROUTINE*/
 void	*philo_life(void *thread);
-t_bool	philo_handler(t_philo *philo);
+int	philo_handler(t_philo *philo);
 /*UTILS*/
 char	*ft_itoa(int nbr);
 int		ft_strlen(char *str);

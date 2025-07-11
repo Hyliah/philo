@@ -6,22 +6,25 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:06:28 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 18:53:47 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:07:16 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-t_bool	philo_handler(t_philo *philo)
+int	philo_handler(t_philo *philo)
 {
+	int			ret;
 	t_thread	*thread;
 
 	thread = malloc(sizeof(t_thread) * philo->parsing.nb_philo);
 	if (!thread)
-		return (unfructuous_malloc(philo), FALSE);
-	if (!init_threads(philo, thread))
-		return (FALSE);
-	if (!join_threads(philo, thread))
-		return (FALSE);
+		return (unfructuous_malloc(philo), 4);
+	ret = init_threads(philo, thread);
+	if (ret)
+		return (ret);
+	ret = join_threads(philo, thread);
+	if (ret)
+		return (ret);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 19:02:37 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/11 20:19:13 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,30 @@ static t_bool	is_odd(int nb);
 // pour l instant les infos sont : nb-> name, et le thread créé via la fonction
 // peut etre il y aura le is_odd et les infos fourchettes
 /* en cours */
-t_bool	init_threads(t_philo *philo, t_thread *thread)
+int init_threads(t_philo *philo, t_thread *thread)
 {
 	int	i;
+	int	ret ;
+	int	nb_philo;
 
 	i = 0;
-	while (i < philo->parsing.nb_philo)
+	nb_philo = philo->parsing.nb_philo;
+	while (i < nb_philo)
 	{
-		if (pthread_create(&thread[i].philo_th, NULL, philo_life, &thread[i]) != 0)
-			return (printf("Error: failed to initiate thread %d\n", i), FALSE);
 		thread[i].philo = philo;
 		thread[i].philo_number = i + 1;
 		thread[i].is_odd = is_odd(i + 1);
 		thread[i].fork_left = &philo->mutex.forks[i];
-		thread[i].fork_right = &philo->mutex.forks[(i + 1) % philo->parsing.nb_philo];
+		thread[i].fork_right = &philo->mutex.forks[(i + 1) % nb_philo];
+		ret = pthread_create(&thread[i].philo_th, NULL, philo_life, &thread[i]);
+		if (ret)
+		{
+    		printf("Error: failed to join create %d (errno: %d)\n", i, ret);
+    		return (ret);
+		}
 		i++;
 	}
-	return (TRUE);
+	return (0);
 }
 
 static t_bool	is_odd(int nb)
