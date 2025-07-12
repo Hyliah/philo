@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 21:30:06 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 20:17:07 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/12 20:40:55 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,18 @@
 
 int	main(int ac, char **av)
 {
-	int	ret;
+	int		ret;
 	t_philo	philo;
 
 	if (!is_entry_correct(ac, av))
 		return (1);
 	init_struct(&philo);
 	parsing_av_entry(&philo, ac, av);
+	if (philo.parsing.nb_philo == 1)
+	{
+		printf("0 1 died");
+		return (1);
+	}
 	malloc_mutex_fork(&philo);
 	ret = philo_handler(&philo);
 	if (ret)

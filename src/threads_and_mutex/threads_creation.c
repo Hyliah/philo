@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 20:19:13 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/12 20:40:08 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_bool	is_odd(int nb);
 // pour l instant les infos sont : nb-> name, et le thread créé via la fonction
 // peut etre il y aura le is_odd et les infos fourchettes
 /* en cours */
-int init_threads(t_philo *philo, t_thread *thread)
+int	init_threads(t_philo *philo, t_thread *thread)
 {
 	int	i;
 	int	ret ;
@@ -37,8 +37,8 @@ int init_threads(t_philo *philo, t_thread *thread)
 		ret = pthread_create(&thread[i].philo_th, NULL, philo_life, &thread[i]);
 		if (ret)
 		{
-    		printf("Error: failed to join create %d (errno: %d)\n", i, ret);
-    		return (ret);
+			printf("Error: failed to join create %d (errno: %d)\n", i, ret);
+			return (ret);
 		}
 		i++;
 	}
