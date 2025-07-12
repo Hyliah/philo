@@ -54,7 +54,7 @@ string_utils.c convert_utils.c \
 free.c \
 check_entry.c parsing_av.c \
 threads_creation.c threads_terminate.c threads_join.c mutex_fork.c\
-philo_life.c philo_handler.c\
+philo_life.c philo_handler.c \
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
