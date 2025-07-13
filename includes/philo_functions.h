@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 23:22:14 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 23:25:49 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_bool	malloc_mutex_fork(t_philo *philo);
 int		init_threads(t_philo *philo, t_thread *thread);
 int		join_threads(t_philo *philo, t_thread *thread);
 /*PHILO_ROUTINE*/
+long	get_current_time(void);
 void	*philo_life(void *thread);
 int		philo_handler(t_philo *philo);
 /*UTILS*/
@@ -33,9 +34,7 @@ int		ft_atoi(const char *str);
 void	*free_ptr(void **ptr);
 void	free_all(t_philo *philo);
 void	init_struct(t_philo *philo);
-void	unfructuous_malloc(t_philo *philo);
 void	ft_putstr_fd(char *s, int fd);
-
-long	get_current_time(void);
+void	unfructuous_malloc(t_philo *philo);
 
 #endif

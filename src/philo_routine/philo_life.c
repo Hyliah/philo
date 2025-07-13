@@ -6,12 +6,11 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 23:21:45 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 23:52:26 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-// pour l utilisation de pthread_join, a voir ce que j en fait
 static void		action_eat(t_thread *thread, pthread_mutex_t *print, int *rep);
 static void		action_sleeping(t_thread *thread, pthread_mutex_t *print);
 static void		print_msg(t_thread *thread, pthread_mutex_t *print, char *msg);
@@ -41,6 +40,9 @@ void	*philo_life(void *thread_arg)
 
 static void	action_eat(t_thread *thread, pthread_mutex_t *print, int *rep)
 {
+	unsigned long	now;
+
+	now = get_current_time();
 	if (thread->is_odd)
 	{
 		pthread_mutex_lock(thread->fork_right);
@@ -54,6 +56,7 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print, int *rep)
 		print_msg(thread, print, "has taken a fork");
 	}
 	print_msg(thread, print, "is eating");
+	thread->last_eaten = now;
 	usleep(thread->philo->parsing.time_eat * 1000);
 	if (thread->philo->parsing.is_rep == TRUE)
 		(*rep)--;
@@ -67,6 +70,21 @@ static void	action_sleeping(t_thread *thread, pthread_mutex_t *print)
 	usleep(thread->philo->parsing.time_sleep * 1000);
 }
 
+static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, int reps)
+{
+	unsigned long	now;
+
+	now = get_current_time();
+	if ((now - thread->last_eaten) > (unsigned long)thread->philo->parsing.time_die)
+	{
+		print_msg(thread, print, "died");
+		return (TRUE);
+	}
+	if (thread->philo->parsing.is_rep == TRUE && reps == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
 static void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg)
 {
 	unsigned long	timestamp;
@@ -75,19 +93,4 @@ static void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg)
 	pthread_mutex_lock(print);
 	printf("%lu %d %s\n", timestamp, thread->philo_number, msg);
 	pthread_mutex_unlock(print);
-}
-
-static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, int reps)
-{
-	if (thread->philo->parsing.is_rep == TRUE)
-	{
-		if (reps == 0)
-			return (TRUE);
-	}
-	else
-	{
-		print_msg(thread, print, "died");
-		// en cours 
-	}
-	return (FALSE);
 }
