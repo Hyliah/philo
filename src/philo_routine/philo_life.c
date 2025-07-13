@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 23:52:26 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 23:58:43 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print, int *rep)
 	if (thread->is_odd)
 	{
 		pthread_mutex_lock(thread->fork_right);
+		print_msg(thread, print, "has taken a fork");
 		pthread_mutex_lock(thread->fork_left);
 		print_msg(thread, print, "has taken a fork");
 	}
 	else
 	{
 		pthread_mutex_lock(thread->fork_left);
+		print_msg(thread, print, "has taken a fork");
 		pthread_mutex_lock(thread->fork_right);
 		print_msg(thread, print, "has taken a fork");
 	}
