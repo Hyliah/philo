@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_functions.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/12 20:40:36 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:38:53 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,7 @@ void	free_all(t_philo *philo);
 void	init_struct(t_philo *philo);
 void	unfructuous_malloc(t_philo *philo);
 void	ft_putstr_fd(char *s, int fd);
+
+void	get_start_time(t_philo *philo);
 
 #endif
