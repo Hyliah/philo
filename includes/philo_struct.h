@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:50:20 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 17:52:35 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 19:20:56 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct s_thread
 	struct s_philo	*philo;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
-	long			current_time;
+	long			start_time;
 }	t_thread;
 
 typedef struct s_philo

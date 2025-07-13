@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:37:52 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 17:52:59 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 19:30:16 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 long	get_current_time()
 {
 	struct timeval	*tv;
-	long			stat_time;
+	long			start_time;
 
 	tv = malloc(sizeof(struct timeval));
 	if (gettimeofday(tv, NULL) != 0)
 		return (0); // faire une sortie du projet un peu correct
-	stat_time = (long)tv->tv_sec;
+	start_time = ((long)tv->tv_usec / 1000); // gestion peut etre meilleure des mili micro et autre secondes -.-'
 	free(tv);
-	return (stat_time);
+	return (start_time);
 }
 
 // NAME
