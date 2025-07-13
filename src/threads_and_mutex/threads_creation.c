@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads_creation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/12 20:40:08 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:54:50 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	init_threads(t_philo *philo, t_thread *thread)
 		thread[i].is_odd = is_odd(i + 1);
 		thread[i].fork_left = &philo->mutex.forks[i];
 		thread[i].fork_right = &philo->mutex.forks[(i + 1) % nb_philo];
+		thread[i].current_time = get_current_time();
 		ret = pthread_create(&thread[i].philo_th, NULL, philo_life, &thread[i]);
 		if (ret)
 		{

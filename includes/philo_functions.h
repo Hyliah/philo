@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 17:38:53 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:53:43 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ void	init_struct(t_philo *philo);
 void	unfructuous_malloc(t_philo *philo);
 void	ft_putstr_fd(char *s, int fd);
 
-void	get_start_time(t_philo *philo);
+long	get_current_time();
 
 #endif

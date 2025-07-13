@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 17:38:40 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:54:44 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	*philo_life(void *thread_arg)
 	thread = (t_thread *)thread_arg;
 	reps = thread->philo->parsing.rep;
 	print = &thread->philo->mutex.print_lock;
-	get_start_time(thread->philo);
+	//get_current_time(thread->philo);
 	while (1)
 	{
 		if (is_dead(thread, print, reps) == TRUE)

@@ -6,23 +6,23 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 17:37:52 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 17:37:57 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/13 17:52:59 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	get_start_time(t_philo *philo)
+long	get_current_time()
 {
 	struct timeval	*tv;
+	long			stat_time;
 
-	(void)philo;
 	tv = malloc(sizeof(struct timeval));
 	if (gettimeofday(tv, NULL) != 0)
-		return ; // faire une sortie du projet un peu correct
-	pthread_mutex_lock(&philo->mutex.print_lock);
-	printf ("%ld that s time\n", tv->tv_sec);
-	pthread_mutex_unlock(&philo->mutex.print_lock);
+		return (0); // faire une sortie du projet un peu correct
+	stat_time = (long)tv->tv_sec;
+	free(tv);
+	return (stat_time);
 }
 
 // NAME
