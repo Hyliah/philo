@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   threads_creation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/14 15:32:26 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/14 22:59:00 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 static t_bool	is_odd(int nb);
+static void		fill_thread_struct(t_philo *philo, t_thread *thread, int i);
 
 int	init_threads(t_philo *philo, t_thread *thread)
 {
@@ -24,13 +25,7 @@ int	init_threads(t_philo *philo, t_thread *thread)
 	nb_philo = philo->parsing.nb_philo;
 	while (i < nb_philo)
 	{
-		thread[i].philo = philo;
-		thread[i].philo_number = i + 1;
-		thread[i].is_odd = is_odd(i + 1);
-		thread[i].fork_left = &philo->mutex.forks[i];
-		thread[i].fork_right = &philo->mutex.forks[(i + 1) % nb_philo];
-		thread[i].start_time = get_current_time();
-		thread[i].last_eaten = get_current_time();
+		fill_thread_struct(philo, &thread[i], i);
 		ret = pthread_create(&thread[i].philo_th, NULL, philo_life, &thread[i]);
 		if (ret)
 		{
@@ -47,4 +42,19 @@ static t_bool	is_odd(int nb)
 	if (nb % 2 != 0)
 		return (TRUE);
 	return (FALSE);
+}
+
+static void	fill_thread_struct(t_philo *philo, t_thread *thread, int i)
+{
+	int	nb_philo;
+
+	nb_philo = philo->parsing.nb_philo;
+	thread->philo = philo;
+	thread->philo_number = i + 1;
+	thread->is_odd = is_odd(i + 1);
+	thread->rep = philo->parsing.rep;
+	thread->fork_left = &philo->mutex.forks[i];
+	thread->fork_right = &philo->mutex.forks[(i + 1) % nb_philo];
+	thread->start_time = get_current_time();
+	thread->last_eaten = get_current_time();
 }
