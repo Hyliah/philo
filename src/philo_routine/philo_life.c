@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_life.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 23:58:43 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:43:23 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print, int *rep)
 	}
 	print_msg(thread, print, "is eating");
 	thread->last_eaten = now;
-	usleep(thread->philo->parsing.time_eat * 1000);
+	usleep(thread->philo->parsing.time_eat * 1000); // faire boucle pour etre plus precis avec usleep plus court
 	if (thread->philo->parsing.is_rep == TRUE)
 		(*rep)--;
 	pthread_mutex_unlock(thread->fork_left);

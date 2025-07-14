@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_functions.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 23:25:49 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/14 16:33:13 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parsing_av_entry(t_philo *philo, int ac, char **av);
 /*THREADS & MUTEX*/
 t_bool	malloc_mutex_fork(t_philo *philo);
 int		init_threads(t_philo *philo, t_thread *thread);
-int		join_threads(t_philo *philo, t_thread *thread);
+int		join_threads(t_philo *philo, t_thread *thread, t_checker *checker);
 /*PHILO_ROUTINE*/
 long	get_current_time(void);
 void	*philo_life(void *thread);
@@ -36,5 +36,7 @@ void	free_all(t_philo *philo);
 void	init_struct(t_philo *philo);
 void	ft_putstr_fd(char *s, int fd);
 void	unfructuous_malloc(t_philo *philo);
+/*CHECKER*/
+int		init_checker(t_philo *philo, t_checker *checker);
 
 #endif

@@ -41,6 +41,7 @@ vpath %.c \
 	$(SRCDIR)/parsing \
 	$(SRCDIR)/includes \
 	$(SRCDIR)/philo_routine \
+	$(SRCDIR)/thread_checker \
 	$(SRCDIR)/threads_and_mutex \
 	$(SRCDIR)/utils/init_program \
 	$(SRCDIR)/utils/function_utils \
@@ -52,6 +53,7 @@ SRC = main.c \
 init.c \
 string_utils.c convert_utils.c \
 free.c \
+thread_checker_init.c \
 check_entry.c parsing_av.c \
 threads_creation.c threads_terminate.c threads_join.c mutex_fork.c\
 philo_life.c philo_handler.c time_handler.c\

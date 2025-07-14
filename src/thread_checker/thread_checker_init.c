@@ -1,39 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads_join.c                                     :+:      :+:    :+:   */
+/*   thread_checker_init.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 15:32:48 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/14 16:34:45 by hlichten         ###   ########.fr       */
+/*   Created: 2025/07/14 15:31:37 by hlichten          #+#    #+#             */
+/*   Updated: 2025/07/14 16:26:06 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	join_threads(t_philo *philo, t_thread *thread, t_checker *checker)
+int	init_checker(t_philo *philo, t_checker *checker)
 {
-	int	i;
-	int	ret;
+	int	ret ;
 
-	i = 0;
-	if (!thread)
-		return (4);
-	while (i < philo->parsing.nb_philo)
-	{
-		ret = pthread_join(thread[i].philo_th, NULL);
-		if (ret)
-		{
-			printf("Error: failed to join thread %d (errno: %d)\n", i, ret);
-			return (ret);
-		}
-		i++;
-	}
-	ret = pthread_join(checker->checker_th, NULL);
+	checker->philo = philo;
+	checker->last_eaten = 0;
+	checker->start_time = 0;
+	checker->nb_philo = philo->parsing.nb_philo;
+	ret = pthread_create(&checker->checker_th, NULL, philo_life, &checker);
 	if (ret)
 	{
-		printf("Error: failed to join thread %d (errno: %d)\n", i, ret);
+		printf("Error: failed to create checker (errno: %d)\n", ret);
 		return (ret);
 	}
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:50:20 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 23:15:47 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/14 16:18:55 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ typedef struct s_thread
 	long			start_time;
 	long			last_eaten;
 }	t_thread;
+
+typedef struct s_checker
+{
+	struct s_philo	*philo;
+	pthread_t		checker_th;
+	int				nb_philo;
+	long			start_time;
+	long			last_eaten;
+}	t_checker;
 
 typedef struct s_philo
 {

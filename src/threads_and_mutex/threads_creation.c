@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads_creation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/13 23:44:03 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/14 15:32:26 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 static t_bool	is_odd(int nb);
 
-// fonction qui va initialiser des structures de philo qui gardent leurs infos
-// comme une sorte de liste chainee. Pas vraiment mais t as l idee
-// pour l instant les infos sont : nb-> name, et le thread créé via la fonction
-// peut etre il y aura le is_odd et les infos fourchettes
-/* en cours */
 int	init_threads(t_philo *philo, t_thread *thread)
 {
 	int	i;
