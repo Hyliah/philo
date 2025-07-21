@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:29:25 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 18:32:45 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/21 17:51:34 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,6 @@ void	free_all(t_philo *philo)
 {
 	pthread_mutex_destroy(&philo->mutex.print_lock);
 }
-
-// void	*free_ptr(void **ptr)
-// {
-// 	if (*ptr && ptr)
-// 	{
-// 		free(*ptr);
-// 		*ptr = NULL;
-// 	}
-// 	return (NULL);
-// }
 
 void	unfructuous_malloc(t_philo *philo)
 {

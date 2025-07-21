@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_functions.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/14 16:33:13 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/21 18:06:10 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,19 @@ void	parsing_av_entry(t_philo *philo, int ac, char **av);
 t_bool	malloc_mutex_fork(t_philo *philo);
 int		init_threads(t_philo *philo, t_thread *thread);
 int		join_threads(t_philo *philo, t_thread *thread, t_checker *checker);
+int	    detach_all(t_philo *philo);
+int     detach_one_thread(t_thread *thread);
+int     detach_mid_creation(t_philo *philo, int nb);
 /*PHILO_ROUTINE*/
 long	get_current_time(void);
 void	*philo_life(void *thread);
 int		philo_handler(t_philo *philo);
+void	*checker_life(void *checker_arg);
 /*UTILS*/
 char	*ft_itoa(int nbr);
-int		ft_strlen(char *str);
 int		ft_atoi(const char *str);
-void	*free_ptr(void **ptr);
 void	free_all(t_philo *philo);
+void	secure_usleep(long time);
 void	init_struct(t_philo *philo);
 void	ft_putstr_fd(char *s, int fd);
 void	unfructuous_malloc(t_philo *philo);

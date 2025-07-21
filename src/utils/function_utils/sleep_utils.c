@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thread_checker_init.c                              :+:      :+:    :+:   */
+/*   sleep_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/14 15:31:37 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 18:06:51 by hlichten         ###   ########.fr       */
+/*   Created: 2025/07/21 17:48:01 by hlichten          #+#    #+#             */
+/*   Updated: 2025/07/21 17:53:19 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_checker(t_philo *philo, t_checker *checker)
+void	secure_usleep(long time)
 {
-	int	ret ;
-
-	checker->philo = philo;
-	checker->last_eaten = 0;
-	checker->start_time = 0;
-	checker->nb_philo = philo->parsing.nb_philo;
-	ret = pthread_create(&checker->checker_th, NULL, checker_life, &checker);
-	if (ret)
+	long start;
+	
+	start = get_current_time();
+	while(1)
 	{
-		printf("Error: failed to create checker (errno: %d)\n", ret);
-		return (ret);
+		if(get_current_time() - start > time)
+			break;
+		usleep(10);
 	}
-	return (0);
 }
