@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:06:28 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/14 16:37:07 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/21 21:44:06 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	philo_handler(t_philo *philo)
 	thread = malloc(sizeof(t_thread) * philo->parsing.nb_philo);
 	if (!thread)
 		return (unfructuous_malloc(philo), 4);
-	checker = malloc(sizeof(t_thread));
+	checker = malloc(sizeof(t_checker));
 	if (!thread)
 		return (unfructuous_malloc(philo), 4);
 	ret = init_threads(philo, thread);
