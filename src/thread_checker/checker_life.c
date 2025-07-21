@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/14 23:18:47 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/21 16:33:23 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ void	*philo_life(void *checker_arg)
 static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print)
 {
 	unsigned long	now;
+	unsigned long	timestamp;
 
 	now = get_current_time();
 	if ((now - thread->last_eaten) > (unsigned long)thread->philo->parsing.time_die)
 	{
-		print_msg(thread, print, "died");
-		return (TRUE);
+		timestamp = now - thread->start_time;
+		pthread_mutex_lock(print);
+		printf("%lu %d is dead\n", timestamp, thread->philo_number);
 	}
 	return (FALSE);
 }
@@ -57,11 +59,12 @@ static t_bool	is_all_reps_done(t_philo *philo)
 	int	i;
 
 	i = 0;
-	while (&philo->thread->philo_th[i] < philo->parsing.nb_philo)
+	while (i < philo->parsing.nb_philo)
 	{
 		if (philo->thread[i].rep > 0)
 			return (FALSE);
 		i++;
 	}
+	pthread_mutex_lock(&philo->mutex.print_lock);
 	return (TRUE);
 }
