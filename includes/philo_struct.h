@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:50:20 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/14 22:47:51 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 18:09:33 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_STRUCT_H
 # define PHILO_STRUCT_H
+
+typedef struct s_philo t_philo;
 
 typedef enum e_bool
 {
@@ -41,27 +43,29 @@ typedef struct s_thread
 	int				philo_number;
 	long			start_time;
 	long			last_eaten;
-	struct s_philo	*philo;
+	t_philo			*philo;
 	t_bool			is_odd;
 	pthread_t		philo_th;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
+	//mutex philo info pour les modif de temps et de repetition 
 }	t_thread;
 
 typedef struct s_checker
 {
-	struct s_philo	*philo;
-	pthread_t		checker_th;
-	int				nb_philo;
-	long			start_time;
-	long			last_eaten;
+	t_philo		*philo;
+	pthread_t	checker_th;
+	int			nb_philo;
+	long		start_time;
+	long		last_eaten;
 }	t_checker;
 
 typedef struct s_philo
 {
-	t_parsing		parsing;
-	t_thread		*thread;
-	t_mutex			mutex;
+	t_checker	checker;
+	t_parsing	parsing;
+	t_thread	*thread;
+	t_mutex		mutex;
 }	t_philo;
 
 #endif

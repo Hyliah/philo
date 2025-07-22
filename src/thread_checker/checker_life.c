@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_life.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 22:48:41 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:57:12 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,19 @@ void	*checker_life(void *checker_arg)
 	t_bool			still_alive;
 	t_checker		*checker;
 	pthread_mutex_t	*print;
-	t_philo			*philo;
 
 	checker = (t_checker *)checker_arg;
-	philo = checker->philo;
-	print = &philo->mutex.print_lock;
+	print = &checker->philo->mutex.print_lock;
 	still_alive = TRUE;
 	while (still_alive)
 	{
 		i = 0;
-		while (i < philo->parsing.nb_philo && still_alive)
+		while (i < checker->philo->parsing.nb_philo && still_alive)
 		{
-			if (philo->parsing.is_rep && is_all_reps_done(checker->philo, &still_alive))
+			if (checker->philo->parsing.is_rep
+				&& is_all_reps_done(checker->philo, &still_alive))
 				break;
-			if (is_dead(&philo->thread[i], print, &still_alive))
+			if (is_dead(&checker->philo->thread[i], print, &still_alive))
 				break;
 			i++;
 		}
@@ -53,7 +52,7 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, t_bool *live)
 	long	time_to_die;
 	if (!thread || !thread->philo)
 		return (FALSE);
-	put("1");
+
 	now = get_current_time();
 	time_to_die = (long)thread->philo->parsing.time_die;
 	last_eaten = thread->last_eaten;

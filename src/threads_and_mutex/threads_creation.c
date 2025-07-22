@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads_creation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/14 22:59:00 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:30:43 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 static t_bool	is_odd(int nb);
 static void		fill_thread_struct(t_philo *philo, t_thread *thread, int i);
 
-int	init_threads(t_philo *philo, t_thread *thread)
+int	init_threads(t_philo *philo)
 {
-	int	i;
-	int	ret ;
-	int	nb_philo;
+	int			i;
+	int			ret ;
+	int			nb_philo;
+	t_thread	*thread;
 
 	i = 0;
+	thread = philo->thread;
 	nb_philo = philo->parsing.nb_philo;
 	while (i < nb_philo)
 	{

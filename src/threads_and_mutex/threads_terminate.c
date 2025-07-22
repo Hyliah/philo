@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads_terminate.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:29:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 17:57:30 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 18:03:58 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,47 @@
 
 //fonction de detach a gerer, tester etc.. c est une premiere mise en place.
 
-int	detach_one_thread(t_thread *thread)
-{
-	int  ret;
+// int	detach_one_thread(t_thread *thread)
+// {
+// 	int  ret;
 
-	ret = pthread_detach(thread->philo_th);
-	if (ret)
-		printf("%d\n", ret); //faire une meilleure gestion de ca
-	return (ret);
-}
+// 	ret = pthread_detach(thread->philo_th);
+// 	if (ret)
+// 		printf("%d\n", ret); //faire une meilleure gestion de ca
+// 	return (ret);
+// }
 
-int	detach_all(t_philo *philo)
-{
-	int	i;
-	int	ret;
+// int	detach_all(t_philo *philo)
+// {
+// 	int	i;
+// 	int	ret;
 
-	i = 0;
-	while (i < philo->parsing.nb_philo)
-	{
-		ret = detach_one_thread(&philo->thread[i]);
-		i++;
-		if (ret)
-			return (i); // pas sure de ca mais a voir.
-	}
-	return (ret);
-}
+// 	i = 0;
+// 	while (i < philo->parsing.nb_philo)
+// 	{
+// 		ret = detach_one_thread(&philo->thread[i]);
+// 		i++;
+// 		if (ret)
+// 			return (i); // pas sure de ca mais a voir.
+// 	}
+// 	return (ret);
+// }
 
-int	detach_mid_creation(t_philo *philo, int nb)
-{
-	int	i;
-	int	ret;
+// int	detach_mid_creation(t_philo *philo, int nb)
+// {
+// 	int	i;
+// 	int	ret;
 
-	i = 0;
-	while (i < nb)
-	{
-		ret = detach_one_thread(&philo->thread[i]);
-		i++;
-		if (ret)
-			return (i); // pas sure de ca mais a voir. comme pour plus haut
-	}
-	return (ret);
-}
+// 	i = 0;
+// 	while (i < nb)
+// 	{
+// 		ret = detach_one_thread(&philo->thread[i]);
+// 		i++;
+// 		if (ret)
+// 			return (i); // pas sure de ca mais a voir. comme pour plus haut
+// 	}
+// 	return (ret);
+// }
 
 /*
 NAME

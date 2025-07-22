@@ -3,19 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   thread_checker_init.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:31:37 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 18:06:51 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:30:10 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	init_checker(t_philo *philo, t_checker *checker)
+int	init_checker(t_philo *philo)
 {
-	int	ret ;
+	int			ret;
+	t_checker	*checker;
 
+	checker = &philo->checker;
 	checker->philo = philo;
 	checker->last_eaten = 0;
 	checker->start_time = 0;
