@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/22 17:57:12 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:19:36 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void	*checker_life(void *checker_arg)
 			i++;
 		}
 		usleep(1000);
-		if (still_alive == FALSE)
-			detach_all(checker->philo);
 	}
 	return (NULL);
 }

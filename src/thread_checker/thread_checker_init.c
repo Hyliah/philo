@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:31:37 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/22 17:30:10 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:18:38 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	init_checker(t_philo *philo)
 	checker->last_eaten = 0;
 	checker->start_time = 0;
 	checker->nb_philo = philo->parsing.nb_philo;
-	ret = pthread_create(&checker->checker_th, NULL, checker_life, &checker);
+	ret = pthread_create(&checker->checker_th, NULL, checker_life, checker);
 	if (ret)
 	{
 		printf("Error: failed to create checker (errno: %d)\n", ret);
