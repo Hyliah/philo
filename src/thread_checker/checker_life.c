@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 22:21:12 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/21 22:48:41 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*checker_life(void *checker_arg)
 		i = 0;
 		while (i < philo->parsing.nb_philo && still_alive)
 		{
-			if (philo->parsing.is_rep && is_all_reps_done(philo, &still_alive))
+			if (philo->parsing.is_rep && is_all_reps_done(checker->philo, &still_alive))
 				break;
 			if (is_dead(&philo->thread[i], print, &still_alive))
 				break;
@@ -40,7 +40,7 @@ void	*checker_life(void *checker_arg)
 		}
 		usleep(1000);
 		if (still_alive == FALSE)
-			detach_all(philo);
+			detach_all(checker->philo);
 	}
 	return (NULL);
 }
@@ -49,13 +49,15 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, t_bool *live)
 {
 	long	now;
 	long	timestamp;
+	long	last_eaten;
 	long	time_to_die;
 	if (!thread || !thread->philo)
 		return (FALSE);
-	
+	put("1");
 	now = get_current_time();
 	time_to_die = (long)thread->philo->parsing.time_die;
-	if ((now - thread->last_eaten) > time_to_die)
+	last_eaten = thread->last_eaten;
+	if ((now - last_eaten) > time_to_die)
 	{
 		timestamp = now - thread->start_time;
 		pthread_mutex_lock(print);

@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:07:48 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 00:39:38 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/21 22:34:46 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_bool	is_entry_correct(int ac, char **av)
 	while (av[i])
 	{
 		if (!is_numeric(av[i]))
-			return (printf("please enter numeric arguments"), FALSE);
+			return (printf("please enter positive numeric arguments"), FALSE);
 		i++;
 	}
 	return (TRUE);
