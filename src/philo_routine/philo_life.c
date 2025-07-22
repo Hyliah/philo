@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_life.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 22:37:43 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:28:09 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,9 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 	}
 	print_msg(thread, print, "is eating");
 	thread->last_eaten = now;
-	thread->rep--;
-	secure_usleep(thread->philo->parsing.time_eat * 1000);
+	thread->rep--; //mettre mutex de modif ici
+	secure_usleep(thread->philo->parsing.time_eat);
+	//usleep(thread->philo->parsing.time_eat);
 	pthread_mutex_unlock(thread->fork_left);
 	pthread_mutex_unlock(thread->fork_right);
 }
@@ -61,7 +62,8 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 static void	action_sleeping(t_thread *thread, pthread_mutex_t *print)
 {
 	print_msg(thread, print, "is sleeping");
-	secure_usleep(thread->philo->parsing.time_sleep * 1000);
+	secure_usleep(thread->philo->parsing.time_sleep);
+	//usleep(thread->philo->parsing.time_sleep);
 }
 
 static void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg)

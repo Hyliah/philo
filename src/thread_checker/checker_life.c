@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/22 19:19:36 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:38:55 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, t_bool *live)
 	{
 		timestamp = now - thread->start_time;
 		pthread_mutex_lock(print);
-		printf("%lu %d is dead\n", timestamp, thread->philo_number);
+		printf("%lu %d died\n", timestamp, thread->philo_number);
 		*live = FALSE;
 		return (TRUE);
 	}
@@ -82,3 +82,8 @@ static t_bool	is_all_reps_done(t_philo *philo, t_bool *alive)
 	pthread_mutex_lock(&philo->mutex.print_lock);
 	return (TRUE);
 }
+
+//etre clean sur le depart 
+// mettre les mutex
+// sortir du code correctement mettre un still runnoing
+// still eating pas mis a jour. 

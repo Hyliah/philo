@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sleep_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 17:48:01 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 17:53:19 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/22 19:26:24 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	secure_usleep(long time)
 	start = get_current_time();
 	while(1)
 	{
-		if(get_current_time() - start > time)
+		if((get_current_time() - start) > time)
 			break;
-		usleep(10);
+		usleep(100);
 	}
 }
