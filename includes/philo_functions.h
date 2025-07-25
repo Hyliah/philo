@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_functions.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/22 17:19:52 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:34:45 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ t_bool	is_entry_correct(int ac, char **av);
 void	parsing_av_entry(t_philo *philo, int ac, char **av);
 /*THREADS & MUTEX*/
 t_bool	malloc_mutex_fork(t_philo *philo);
+t_bool	malloc_mutex_data(t_philo *philo);
 int		init_threads(t_philo *philo);
 int		join_threads(t_philo *philo, t_thread *thread, t_checker checker);
-int	    detach_all(t_philo *philo);
-int     detach_one_thread(t_thread *thread);
-int     detach_mid_creation(t_philo *philo, int nb);
 /*PHILO_ROUTINE*/
 long	get_current_time(void);
 void	*philo_life(void *thread);

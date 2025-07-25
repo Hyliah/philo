@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads_creation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/22 17:30:43 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:33:53 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ static void	fill_thread_struct(t_philo *philo, t_thread *thread, int i)
 	thread->philo_number = i + 1;
 	thread->is_odd = is_odd(i + 1);
 	thread->rep = philo->parsing.rep;
+	thread->data_access = &philo->mutex.data_accesses[i];
 	thread->fork_left = &philo->mutex.forks[i];
 	thread->fork_right = &philo->mutex.forks[(i + 1) % nb_philo];
 	thread->start_time = get_current_time();

@@ -52,11 +52,11 @@ vpath %.c \
 SRC = main.c \
 init.c \
 free.c exit_program.c\
-thread_checker_init.c checker_life.c \
 check_entry.c parsing_av.c \
-string_utils.c convert_utils.c sleep_utils.c \
-threads_creation.c threads_terminate.c threads_join.c mutex_fork.c \
-philo_life.c philo_handler.c time_handler.c \
+philo_life.c philo_handler.c \
+thread_checker_init.c checker_life.c \
+string_utils.c convert_utils.c sleep_utils.c time_utils.c\
+threads_creation.c threads_terminate.c threads_join.c mutex_fork_data.c \
 
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 

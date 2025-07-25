@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_life.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/22 19:38:55 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 17:20:38 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	*checker_life(void *checker_arg)
 				break;
 			i++;
 		}
-		usleep(1000);
+		//usleep(10);
 	}
 	return (NULL);
 }
@@ -48,15 +48,19 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, t_bool *live)
 	long	timestamp;
 	long	last_eaten;
 	long	time_to_die;
+	
 	if (!thread || !thread->philo)
 		return (FALSE);
-
 	now = get_current_time();
+	pthread_mutex_lock(thread->data_access);
 	time_to_die = (long)thread->philo->parsing.time_die;
 	last_eaten = thread->last_eaten;
+	pthread_mutex_unlock(thread->data_access);
 	if ((now - last_eaten) > time_to_die)
 	{
+		pthread_mutex_lock(thread->data_access);
 		timestamp = now - thread->start_time;
+		pthread_mutex_unlock(thread->data_access);
 		pthread_mutex_lock(print);
 		printf("%lu %d died\n", timestamp, thread->philo_number);
 		*live = FALSE;
@@ -68,11 +72,15 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, t_bool *live)
 static t_bool	is_all_reps_done(t_philo *philo, t_bool *alive)
 {
 	int	i;
+	int	rep;
 
 	i = 0;
 	while (i < philo->parsing.nb_philo)
 	{
-		if (philo->thread[i].rep > 0)
+		pthread_mutex_lock(philo->thread[i].data_access);
+		rep = philo->thread[i].rep;
+		pthread_mutex_unlock(philo->thread[i].data_access);
+		if (rep > 0)
 		{
 			*alive = FALSE;
 			return (FALSE);

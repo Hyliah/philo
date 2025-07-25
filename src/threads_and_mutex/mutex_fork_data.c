@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mutex_fork.c                                       :+:      :+:    :+:   */
+/*   mutex_fork_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:42:49 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/11 18:34:52 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:41:51 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,25 @@ t_bool	malloc_mutex_fork(t_philo *philo)
 	while (i < nb_philo)
 	{
 		if (pthread_mutex_init(&philo->mutex.forks[i], NULL) != 0)
+			return (FALSE); // faire une fonction qui va free au milieu iykyk
+		i++;
+	}
+	return (TRUE);
+}
+
+t_bool	malloc_mutex_data(t_philo *philo)
+{
+	int	i;
+	int	nb_philo;
+
+	nb_philo = philo->parsing.nb_philo;
+	philo->mutex.data_accesses = malloc(sizeof(pthread_mutex_t) * nb_philo);
+	if (!philo->mutex.data_accesses)
+		return (unfructuous_malloc(philo), FALSE);
+	i = 0;
+	while (i < nb_philo)
+	{
+		if (pthread_mutex_init(&philo->mutex.data_accesses[i], NULL) != 0)
 			return (FALSE); // faire une fonction qui va free au milieu iykyk
 		i++;
 	}
