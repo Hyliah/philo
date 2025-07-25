@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:54:28 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 15:54:41 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:51:39 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,14 @@ long	get_current_time(void)
 		return (0);
 	}
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+long	start_program(t_philo *philo)
+{
+	long	now;
+	long	start_program;
+
+	now = get_current_time();
+	start_program = now + ((long)philo->parsing.nb_philo * 20);
+	return (start_program);
 }

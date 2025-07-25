@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 17:20:38 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:42:50 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*checker_life(void *checker_arg)
 	checker = (t_checker *)checker_arg;
 	print = &checker->philo->mutex.print_lock;
 	still_alive = TRUE;
+	usleep(2000);
 	while (still_alive)
 	{
 		i = 0;
@@ -55,6 +56,13 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, t_bool *live)
 	pthread_mutex_lock(thread->data_access);
 	time_to_die = (long)thread->philo->parsing.time_die;
 	last_eaten = thread->last_eaten;
+
+	//debug
+	// pthread_mutex_lock(print);
+	// printf("last eaten %d = %lu\n", thread->philo_number, (now - thread->last_eaten));
+	// pthread_mutex_unlock(print);
+	// usleep(20000);
+
 	pthread_mutex_unlock(thread->data_access);
 	if ((now - last_eaten) > time_to_die)
 	{
@@ -91,7 +99,6 @@ static t_bool	is_all_reps_done(t_philo *philo, t_bool *alive)
 	return (TRUE);
 }
 
-//etre clean sur le depart 
-// mettre les mutex
+// etre clean sur le depart 
 // sortir du code correctement mettre un still runnoing
 // still eating pas mis a jour. 
