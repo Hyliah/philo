@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:42:49 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 23:56:46 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/26 00:56:56 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ t_bool	malloc_mutex_data_checker(t_philo *philo)
 	if (!philo->checker.data_access)
 		return (unfructuous_malloc(philo), FALSE);
 	if (pthread_mutex_init(philo->checker.data_access, NULL) != 0)
-			return (FALSE);
+		return (FALSE);
 	return (TRUE);
 }

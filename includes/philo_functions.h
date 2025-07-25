@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/26 00:42:16 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/26 00:57:14 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ void	unfructuous_malloc(t_philo *philo);
 /*CHECKER*/
 int		init_checker(t_philo *philo);
 
-void     exit_program(t_philo *philo);
+void	exit_program(t_philo *philo);
 
 #endif

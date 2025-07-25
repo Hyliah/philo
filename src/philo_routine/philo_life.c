@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/26 00:39:52 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/26 00:57:31 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	*philo_life(void *thread_arg)
 		if (thread->philo->checker.still_running == FALSE)
 		{
 			pthread_mutex_unlock(thread->philo->checker.data_access);
-			break;
+			break ;
 		}
 		pthread_mutex_unlock(thread->philo->checker.data_access);
 	}
