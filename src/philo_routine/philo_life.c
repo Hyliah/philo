@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 18:33:18 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:38:24 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	*philo_life(void *thread_arg)
 
 	thread = (t_thread *)thread_arg;
 	print = &thread->philo->mutex.print_lock;
+	printf("start program = %lu\n", thread->start_time);
+	printf("now = %lu\n", get_current_time());
+	wait_start_program(thread->start_time);
 	while (1)
 	{
 		action_eat(thread, print);

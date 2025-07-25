@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:54:28 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 18:51:39 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:35:10 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,13 @@ long	start_program(t_philo *philo)
 	now = get_current_time();
 	start_program = now + ((long)philo->parsing.nb_philo * 20);
 	return (start_program);
+}
+
+void	wait_start_program(long start_time)
+{
+	long	actual_time;
+
+	actual_time = get_current_time();
+	while (actual_time < start_time)
+		usleep(20);
 }

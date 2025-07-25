@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 18:42:50 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:33:46 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*checker_life(void *checker_arg)
 	checker = (t_checker *)checker_arg;
 	print = &checker->philo->mutex.print_lock;
 	still_alive = TRUE;
-	usleep(2000);
+	wait_start_program(checker->start_time);
 	while (still_alive)
 	{
 		i = 0;

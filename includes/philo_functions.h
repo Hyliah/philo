@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 18:52:30 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:32:32 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*ft_itoa(int nbr);
 long	get_current_time(void);
 long	start_program(t_philo *philo);
 int		ft_atoi(const char *str);
+void	wait_start_program(long start_time);
 void	free_all(t_philo *philo);
 void	secure_usleep(long time);
 void	init_struct(t_philo *philo);
