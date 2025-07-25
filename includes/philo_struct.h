@@ -6,14 +6,14 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:50:20 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 15:59:05 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 23:46:04 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_STRUCT_H
 # define PHILO_STRUCT_H
 
-typedef struct s_philo t_philo;
+typedef struct s_philo	t_philo;
 
 typedef enum e_bool
 {
@@ -54,11 +54,12 @@ typedef struct s_thread
 
 typedef struct s_checker
 {
-	t_philo		*philo;
-	pthread_t	checker_th;
-	int			nb_philo;
-	long		start_time;
-	long		last_eaten;
+	t_philo			*philo;
+	pthread_t		checker_th;
+	int				nb_philo;
+	long			start_time;
+	t_bool			still_running;
+	pthread_mutex_t	*data_access;
 }	t_checker;
 
 typedef struct s_philo

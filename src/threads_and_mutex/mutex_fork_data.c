@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:42:49 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 16:41:51 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 23:56:46 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_bool	malloc_mutex_fork(t_philo *philo)
 	return (TRUE);
 }
 
-t_bool	malloc_mutex_data(t_philo *philo)
+t_bool	malloc_mutex_data_thread(t_philo *philo)
 {
 	int	i;
 	int	nb_philo;
@@ -47,5 +47,15 @@ t_bool	malloc_mutex_data(t_philo *philo)
 			return (FALSE); // faire une fonction qui va free au milieu iykyk
 		i++;
 	}
+	return (TRUE);
+}
+
+t_bool	malloc_mutex_data_checker(t_philo *philo)
+{
+	philo->checker.data_access = malloc(sizeof(pthread_mutex_t));
+	if (!philo->checker.data_access)
+		return (unfructuous_malloc(philo), FALSE);
+	if (pthread_mutex_init(philo->checker.data_access, NULL) != 0)
+			return (FALSE);
 	return (TRUE);
 }

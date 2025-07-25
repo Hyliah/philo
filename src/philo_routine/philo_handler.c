@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:06:28 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/22 18:08:33 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/26 00:43:01 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,5 @@ int	philo_handler(t_philo *philo)
 	ret = init_checker(philo);
 	if (ret)
 		return (ret);
-	ret = join_threads(philo, philo->thread, philo->checker);
-	if (ret)
-		return (ret);
-	return (TRUE);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:31:37 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 19:27:51 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/25 23:59:44 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ int	init_checker(t_philo *philo)
 
 	checker = &philo->checker;
 	checker->philo = philo;
-	//checker->last_eaten = 0;
+	checker->still_running = TRUE;
 	checker->start_time = start_program(philo);
 	checker->nb_philo = philo->parsing.nb_philo;
+	malloc_mutex_data_checker(philo);
 	ret = pthread_create(&checker->checker_th, NULL, checker_life, checker);
 	if (ret)
 	{

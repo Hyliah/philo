@@ -6,12 +6,13 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 19:33:46 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/26 00:44:48 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static void		change_still_running(t_checker *checker);
 static t_bool	is_all_reps_done(t_philo *philo, t_bool *alive);
 static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, t_bool *liv);
 
@@ -33,13 +34,13 @@ void	*checker_life(void *checker_arg)
 		{
 			if (checker->philo->parsing.is_rep
 				&& is_all_reps_done(checker->philo, &still_alive))
-				break;
+				break ;
 			if (is_dead(&checker->philo->thread[i], print, &still_alive))
-				break;
+				break ;
 			i++;
 		}
-		//usleep(10);
 	}
+	change_still_running(checker);
 	return (NULL);
 }
 
@@ -49,20 +50,13 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print, t_bool *live)
 	long	timestamp;
 	long	last_eaten;
 	long	time_to_die;
-	
+
 	if (!thread || !thread->philo)
 		return (FALSE);
 	now = get_current_time();
 	pthread_mutex_lock(thread->data_access);
 	time_to_die = (long)thread->philo->parsing.time_die;
 	last_eaten = thread->last_eaten;
-
-	//debug
-	// pthread_mutex_lock(print);
-	// printf("last eaten %d = %lu\n", thread->philo_number, (now - thread->last_eaten));
-	// pthread_mutex_unlock(print);
-	// usleep(20000);
-
 	pthread_mutex_unlock(thread->data_access);
 	if ((now - last_eaten) > time_to_die)
 	{
@@ -99,6 +93,9 @@ static t_bool	is_all_reps_done(t_philo *philo, t_bool *alive)
 	return (TRUE);
 }
 
-// etre clean sur le depart 
-// sortir du code correctement mettre un still runnoing
-// still eating pas mis a jour. 
+static void	change_still_running(t_checker *checker)
+{
+	pthread_mutex_lock(checker->data_access);
+	checker->still_running = FALSE;
+	pthread_mutex_unlock(checker->data_access);
+}
