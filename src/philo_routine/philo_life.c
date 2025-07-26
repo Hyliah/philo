@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/26 00:57:31 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/26 23:23:19 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 	print_msg(thread, print, "is eating");
 	pthread_mutex_lock(thread->data_access);
 	thread->last_eaten = now;
-	thread->rep--;
+	if (thread->rep > 0)
+		thread->rep--;
 	time_eat = thread->philo->parsing.time_eat;
 	pthread_mutex_unlock(thread->data_access);
 	secure_usleep(time_eat);

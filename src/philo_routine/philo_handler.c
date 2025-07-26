@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:06:28 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/26 00:43:01 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/26 23:25:37 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	philo_handler(t_philo *philo)
 	ret = init_checker(philo);
 	if (ret)
 		return (ret);
+	//ret = join_threads(philo, philo->thread, philo->checker);
 	return (0);
 }

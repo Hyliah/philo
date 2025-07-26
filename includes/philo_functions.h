@@ -6,7 +6,7 @@
 /*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/26 00:57:14 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/26 23:39:35 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ t_bool	malloc_mutex_fork(t_philo *philo);
 t_bool	malloc_mutex_data_thread(t_philo *philo);
 t_bool	malloc_mutex_data_checker(t_philo *philo);
 int		init_threads(t_philo *philo);
-int		join_threads(t_philo *philo, t_thread *thread, t_checker checker);
+//int		join_threads(t_philo *philo, t_thread *thread, t_checker checker);
+int		join_threads(t_philo *philo);
 /*PHILO_ROUTINE*/
 void	*philo_life(void *thread);
 int		philo_handler(t_philo *philo);

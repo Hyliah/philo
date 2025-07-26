@@ -74,7 +74,7 @@ leaks:
 ifeq ($(OS), Darwin)
     MallocStackLogging=YES leaks --outputGraph=minishell.memgraph --fullContent --fullStackHistory --atExit -- ./$(NAME)
 else ifeq ($(OS), Linux)
-	valgrind --leak-check=full --log-file=valgrind.log --show-leak-kinds=all --track-fds=all --default-suppressions=yes ./$(NAME)
+	valgrind --leak-check=full --log-file=valgrind.log --show-leak-kinds=all --default-suppressions=yes ./$(NAME)
 endif
 	
 # Compile each .c file to .o		
