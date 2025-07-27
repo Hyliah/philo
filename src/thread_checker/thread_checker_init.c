@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 15:31:37 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 17:57:14 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 20:28:03 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	init_checker(t_philo *philo)
 
 	checker = &philo->checker;
 	checker->philo = philo;
-	checker->still_running = TRUE;
-	checker->is_joined = FALSE;
 	checker->nb_philo = philo->parsing.nb_philo;
 	init_mutex_data_checker(philo);
 	ret = pthread_create(&checker->checker_th, NULL, checker_life, checker);

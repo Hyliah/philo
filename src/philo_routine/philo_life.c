@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 18:40:54 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 20:07:53 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 
 
 	// pthread_mutex_lock(print);
-	// printf("thread last_eaten : %p\n", &thread->last_eaten);
+	// printf("Philo %d data_access %p\n", thread->philo_number, &thread->data_access);
+	// printf("Philo %d fork left %p\n", thread->philo_number, thread->fork_left);
+	// printf("Philo %d fork right %p\n", thread->philo_number, thread->fork_right);
 	// pthread_mutex_unlock(print);
 	
 	

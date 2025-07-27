@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 17:30:55 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 20:53:28 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,17 @@ int	init_threads(t_philo *philo)
 	int			i;
 	int			ret ;
 	int			nb_philo;
-	t_thread	*thread;
+	t_thread	*threads;
 
 	i = 0;
-	thread = philo->thread;
+	threads = philo->thread;
 	nb_philo = philo->parsing.nb_philo;
 	while (i < nb_philo)
 	{
-		fill_thread_struct(philo, &thread[i], i);
-		ret = pthread_create(&thread[i].philo_th, NULL, philo_life, &thread[i]); //malloc ici qui  n est pas detruit
+		printf("thread[%d] %p\n", i, &threads[i]);
+		init_mutex_data_thread(&threads[i]);
+		fill_thread_struct(philo, &threads[i], i);
+		ret = pthread_create(&threads[i].philo_th, NULL, philo_life, &threads[i]); //malloc ici qui  n est pas detruit
 		if (ret)
 		{
 			printf("Error: failed to join create %d (errno: %d)\n", i, ret);
@@ -58,7 +60,7 @@ static void	fill_thread_struct(t_philo *philo, t_thread *thread, int i)
 		thread->fork_right = &philo->mutex.forks[i];
 	}
 	thread->last_eaten = philo->start_time;
-	init_mutex_data_thread(thread);
+	
 }
 
 static t_bool	is_odd(int nb)

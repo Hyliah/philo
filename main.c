@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 21:30:06 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 14:24:25 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 21:05:20 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int ac, char **av)
 	int		ret;
 	t_philo	philo;
 
+	memset((void *) &philo, 0, sizeof(t_philo));
 	if (!is_entry_correct(ac, av))
 		return (1);
 	init_struct(&philo);

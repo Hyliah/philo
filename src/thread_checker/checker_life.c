@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 18:13:05 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 20:58:14 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	*checker_life(void *checker_arg)
 	checker = (t_checker *)checker_arg;
 	print = &checker->philo->mutex.print_lock;
 	wait_start_program(checker->philo->start_time);
-	checker->still_running = TRUE;
 	while (is_running(checker->philo))
 	{
 		i = 0;
@@ -34,13 +33,11 @@ void	*checker_life(void *checker_arg)
 			if (checker->philo->parsing.is_rep
 				&& is_all_reps_done(checker->philo))
 				break ;
-			pthread_mutex_lock(&checker->philo->thread[i].data_access);
 			if (is_dead(&checker->philo->thread[i], print))
 				break ;
-			pthread_mutex_unlock(&checker->philo->thread[i].data_access);
 			i++;
 		}
-		usleep(100);
+		usleep(500);
 	}
 	while (is_joined(checker->philo) == FALSE)
 		usleep(500);
@@ -58,8 +55,15 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print)
 	if (!thread || !thread->philo)
 		return (FALSE);
 	now = get_current_time();
+
+	// pthread_mutex_lock(print);
+	// 	printf("Philo%d is_dead data_access %p\n",thread->philo_number, &thread->data_access);
+	// pthread_mutex_unlock(print);
+	
+	pthread_mutex_lock(&thread->data_access);
 	time_to_die = (long)thread->philo->parsing.time_die;
 	last_eaten = thread->last_eaten;
+	pthread_mutex_unlock(&thread->data_access);
 	if ((now - last_eaten) > time_to_die)
 	{
 		change_still_running(&thread->philo->checker);
