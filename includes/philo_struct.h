@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_struct.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:50:20 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 23:46:04 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:37:17 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef struct s_mutex
 {
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print_lock;
-	pthread_mutex_t	*data_accesses;
 }	t_mutex;
 
 typedef struct s_thread
@@ -49,7 +48,7 @@ typedef struct s_thread
 	pthread_t		philo_th;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
-	pthread_mutex_t	*data_access;
+	pthread_mutex_t	data_access;
 }	t_thread;
 
 typedef struct s_checker
@@ -59,7 +58,7 @@ typedef struct s_checker
 	int				nb_philo;
 	long			start_time;
 	t_bool			still_running;
-	pthread_mutex_t	*data_access;
+	pthread_mutex_t	mutex_running;
 }	t_checker;
 
 typedef struct s_philo

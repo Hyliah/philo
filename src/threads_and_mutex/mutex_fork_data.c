@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_fork_data.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:42:49 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/26 00:56:56 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:37:31 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,31 +31,16 @@ t_bool	malloc_mutex_fork(t_philo *philo)
 	return (TRUE);
 }
 
-t_bool	malloc_mutex_data_thread(t_philo *philo)
+t_bool	init_mutex_data_thread(t_thread *thread)
 {
-	int	i;
-	int	nb_philo;
-
-	nb_philo = philo->parsing.nb_philo;
-	philo->mutex.data_accesses = malloc(sizeof(pthread_mutex_t) * nb_philo);
-	if (!philo->mutex.data_accesses)
-		return (unfructuous_malloc(philo), FALSE);
-	i = 0;
-	while (i < nb_philo)
-	{
-		if (pthread_mutex_init(&philo->mutex.data_accesses[i], NULL) != 0)
-			return (FALSE); // faire une fonction qui va free au milieu iykyk
-		i++;
-	}
+	if (pthread_mutex_init(&thread->data_access, NULL) != 0)
+		return (FALSE);
 	return (TRUE);
 }
 
-t_bool	malloc_mutex_data_checker(t_philo *philo)
+t_bool	init_mutex_data_checker(t_philo *philo)
 {
-	philo->checker.data_access = malloc(sizeof(pthread_mutex_t));
-	if (!philo->checker.data_access)
-		return (unfructuous_malloc(philo), FALSE);
-	if (pthread_mutex_init(philo->checker.data_access, NULL) != 0)
+	if (pthread_mutex_init(&philo->checker.mutex_running, NULL) != 0)
 		return (FALSE);
 	return (TRUE);
 }

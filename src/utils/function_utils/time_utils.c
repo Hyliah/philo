@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:54:28 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 20:39:00 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:45:52 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ long	start_program(t_philo *philo)
 	long	start_program;
 
 	now = get_current_time();
-	start_program = now + ((long)philo->parsing.nb_philo * 20);
+	start_program = now + (((long)philo->parsing.nb_philo + 1) * 20);
 	return (start_program);
 }
 

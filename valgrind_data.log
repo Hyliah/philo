@@ -1,0 +1,88 @@
+==2382512== Helgrind, a thread error detector
+==2382512== Copyright (C) 2007-2017, and GNU GPL'd, by OpenWorks LLP et al.
+==2382512== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2382512== Command: ./philo 3 200 200 200
+==2382512== Parent PID: 2374909
+==2382512== 
+==2382512== ---Thread-Announcement------------------------------------------
+==2382512== 
+==2382512== Thread #1 is the program's root thread
+==2382512== 
+==2382512== ---Thread-Announcement------------------------------------------
+==2382512== 
+==2382512== Thread #5 was created
+==2382512==    at 0x49A09F3: clone (clone.S:76)
+==2382512==    by 0x49A18EE: __clone_internal (clone-internal.c:83)
+==2382512==    by 0x490F6D8: create_thread (pthread_create.c:295)
+==2382512==    by 0x49101FF: pthread_create@@GLIBC_2.34 (pthread_create.c:828)
+==2382512==    by 0x4853767: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x109DF1: init_checker (thread_checker_init.c:26)
+==2382512==    by 0x109D3A: philo_handler (philo_handler.c:25)
+==2382512==    by 0x1093B2: main (main.c:26)
+==2382512== 
+==2382512== ----------------------------------------------------------------
+==2382512== 
+==2382512== Thread #1 unlocked lock at 0x1FFEFFFA18 currently held by thread #5
+==2382512==    at 0x48511E6: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x109595: exit_program (exit_program.c:59)
+==2382512==    by 0x1093D7: main (main.c:29)
+==2382512==  Lock at 0x1FFEFFFA18 was first observed
+==2382512==    at 0x4854BFE: pthread_mutex_init (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x109468: init_struct (init.c:23)
+==2382512==    by 0x109367: main (main.c:22)
+==2382512==  Address 0x1ffefffa18 is on thread #1's stack
+==2382512==  in frame #2, created by main (main.c:16)
+==2382512== 
+==2382512== 
+==2382512== ----------------------------------------------------------------
+==2382512== 
+==2382512== Thread #1: pthread_mutex_destroy of a locked mutex
+==2382512==    at 0x4850A76: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x1095A5: exit_program (exit_program.c:60)
+==2382512==    by 0x1093D7: main (main.c:29)
+==2382512== 
+==2382512== ----------------------------------------------------------------
+==2382512== 
+==2382512== Possible data race during read of size 1 at 0x4AA7108 by thread #1
+==2382512== Locks held: none
+==2382512==    at 0x485077C: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x4850A2A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x1095FD: exit_program (exit_program.c:63)
+==2382512==    by 0x1093D7: main (main.c:29)
+==2382512== 
+==2382512== This conflicts with a previous write of size 4 by thread #5
+==2382512== Locks held: none
+==2382512==    at 0x4914A90: __pthread_mutex_unlock_usercnt (pthread_mutex_unlock.c:62)
+==2382512==    by 0x4914A90: pthread_mutex_unlock@@GLIBC_2.2.5 (pthread_mutex_unlock.c:368)
+==2382512==    by 0x4851248: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x10A00D: is_dead (checker_life.c:65)
+==2382512==    by 0x109EEB: checker_life (checker_life.c:38)
+==2382512==    by 0x485396A: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x490FAC2: start_thread (pthread_create.c:442)
+==2382512==    by 0x49A0A03: clone (clone.S:100)
+==2382512==  Address 0x4aa7108 is 8 bytes inside a block of size 120 alloc'd
+==2382512==    at 0x484A919: malloc (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x10A655: malloc_mutex_data_thread (mutex_fork_data.c:40)
+==2382512==    by 0x1093A3: main (main.c:25)
+==2382512==  Block was alloc'd by thread #1
+==2382512== 
+==2382512== ----------------------------------------------------------------
+==2382512== 
+==2382512== Thread #1: pthread_mutex_destroy of a locked mutex
+==2382512==    at 0x4850A76: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x109652: exit_program (exit_program.c:67)
+==2382512==    by 0x1093D7: main (main.c:29)
+==2382512== 
+==2382512== ----------------------------------------------------------------
+==2382512== 
+==2382512== Thread #1's call to pthread_mutex_destroy failed
+==2382512==    with error code 16 (EBUSY: Device or resource busy)
+==2382512==    at 0x4850B43: ??? (in /usr/libexec/valgrind/vgpreload_helgrind-amd64-linux.so)
+==2382512==    by 0x109652: exit_program (exit_program.c:67)
+==2382512==    by 0x1093D7: main (main.c:29)
+==2382512== 
+==2382512== 
+==2382512== Use --history-level=approx or =none to gain increased speed, at
+==2382512== the cost of reduced accuracy of conflicting-access information
+==2382512== For lists of detected and suppressed errors, rerun with: -s
+==2382512== ERROR SUMMARY: 14 errors from 5 contexts (suppressed: 30997 from 26)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   threads_creation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/25 19:25:05 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:35:23 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	init_threads(t_philo *philo)
 	while (i < nb_philo)
 	{
 		fill_thread_struct(philo, &thread[i], i);
-		ret = pthread_create(&thread[i].philo_th, NULL, philo_life, &thread[i]);
+		ret = pthread_create(&thread[i].philo_th, NULL, philo_life, &thread[i]); //malloc ici qui  n est pas detruit
 		if (ret)
 		{
 			printf("Error: failed to join create %d (errno: %d)\n", i, ret);
@@ -37,13 +37,6 @@ int	init_threads(t_philo *philo)
 		i++;
 	}
 	return (0);
-}
-
-static t_bool	is_odd(int nb)
-{
-	if (nb % 2 != 0)
-		return (TRUE);
-	return (FALSE);
 }
 
 static void	fill_thread_struct(t_philo *philo, t_thread *thread, int i)
@@ -55,9 +48,16 @@ static void	fill_thread_struct(t_philo *philo, t_thread *thread, int i)
 	thread->philo_number = i + 1;
 	thread->is_odd = is_odd(i + 1);
 	thread->rep = philo->parsing.rep;
-	thread->data_access = &philo->mutex.data_accesses[i];
 	thread->fork_left = &philo->mutex.forks[i];
 	thread->fork_right = &philo->mutex.forks[(i + 1) % nb_philo];
 	thread->start_time = start_program(philo);
 	thread->last_eaten = start_program(philo);
+	init_mutex_data_thread(thread);
+}
+
+static t_bool	is_odd(int nb)
+{
+	if (nb % 2 != 0)
+		return (TRUE);
+	return (FALSE);
 }

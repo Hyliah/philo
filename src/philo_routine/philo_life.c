@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_life.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/26 23:23:19 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 16:17:27 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,8 @@ void	*philo_life(void *thread_arg)
 		action_eat(thread, print);
 		action_sleeping(thread, print);
 		print_msg(thread, print, "is thinking");
-		pthread_mutex_lock(thread->philo->checker.data_access);
-		if (thread->philo->checker.still_running == FALSE)
-		{
-			pthread_mutex_unlock(thread->philo->checker.data_access);
+		if (is_running(thread->philo) == FALSE)
 			break ;
-		}
-		pthread_mutex_unlock(thread->philo->checker.data_access);
 	}
 	return (NULL);
 }
@@ -46,15 +41,16 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 	long	now;
 	long	time_eat;
 
-	now = get_current_time();
 	lock_fork_msg(thread, print);
-	print_msg(thread, print, "is eating");
-	pthread_mutex_lock(thread->data_access);
+	now = get_current_time();
+	if (is_running(thread->philo))
+		print_msg(thread, print, "is eating");
+	pthread_mutex_lock(&thread->data_access);
 	thread->last_eaten = now;
 	if (thread->rep > 0)
 		thread->rep--;
 	time_eat = thread->philo->parsing.time_eat;
-	pthread_mutex_unlock(thread->data_access);
+	pthread_mutex_unlock(&thread->data_access);
 	secure_usleep(time_eat);
 	pthread_mutex_unlock(thread->fork_left);
 	pthread_mutex_unlock(thread->fork_right);
@@ -88,10 +84,13 @@ static void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg)
 {
 	long	timestamp;
 
-	pthread_mutex_lock(thread->data_access);
+	pthread_mutex_lock(&thread->data_access);
 	timestamp = get_current_time() - thread->start_time;
-	pthread_mutex_unlock(thread->data_access);
-	pthread_mutex_lock(print);
-	printf("%lu %d %s\n", timestamp, thread->philo_number, msg);
-	pthread_mutex_unlock(print);
+	pthread_mutex_unlock(&thread->data_access);
+	if (is_running(thread->philo))
+	{
+		pthread_mutex_lock(print);
+		printf("%lu %d %s\n", timestamp, thread->philo_number, msg);
+		pthread_mutex_unlock(print);
+	}
 }
