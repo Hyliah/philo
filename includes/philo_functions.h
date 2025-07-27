@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 15:38:56 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 18:12:33 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@ int		main(int ac, char **av);
 t_bool	is_entry_correct(int ac, char **av);
 void	parsing_av_entry(t_philo *philo, int ac, char **av);
 /*THREADS & MUTEX*/
+t_bool	is_joined(t_philo *philo);
 t_bool	malloc_mutex_fork(t_philo *philo);
 t_bool	init_mutex_data_thread(t_thread *thread);
 t_bool	init_mutex_data_checker(t_philo *philo);
 int		init_threads(t_philo *philo);
-//int		join_threads(t_philo *philo, t_thread *thread, t_checker checker);
 int		join_threads(t_philo *philo);
+int		join_checker(t_philo *philo);
 /*PHILO_ROUTINE*/
 void	*philo_life(void *thread);
 int		philo_handler(t_philo *philo);
@@ -33,13 +34,13 @@ void	*checker_life(void *checker_arg);
 /*UTILS*/
 char	*ft_itoa(int nbr);
 long	get_current_time(void);
-long	start_program(t_philo *philo);
 int		ft_atoi(const char *str);
-void	wait_start_program(long start_time);
 void	free_all(t_philo *philo);
 void	secure_usleep(long time);
 void	init_struct(t_philo *philo);
 void	ft_putstr_fd(char *s, int fd);
+void	start_program(t_philo *philo);
+void	wait_start_program(long start_time);
 void	unfructuous_malloc(t_philo *philo);
 /*CHECKER*/
 t_bool	is_running(t_philo *philo);

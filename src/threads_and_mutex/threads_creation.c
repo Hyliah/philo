@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 14:35:23 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:30:55 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,18 @@ static void	fill_thread_struct(t_philo *philo, t_thread *thread, int i)
 	nb_philo = philo->parsing.nb_philo;
 	thread->philo = philo;
 	thread->philo_number = i + 1;
-	thread->is_odd = is_odd(i + 1);
 	thread->rep = philo->parsing.rep;
-	thread->fork_left = &philo->mutex.forks[i];
-	thread->fork_right = &philo->mutex.forks[(i + 1) % nb_philo];
-	thread->start_time = start_program(philo);
-	thread->last_eaten = start_program(philo);
+	if (is_odd(i + 1))
+	{
+		thread->fork_left = &philo->mutex.forks[i];
+		thread->fork_right = &philo->mutex.forks[(i + 1) % nb_philo];
+	}
+	else
+	{
+		thread->fork_left = &philo->mutex.forks[(i + 1) % nb_philo];
+		thread->fork_right = &philo->mutex.forks[i];
+	}
+	thread->last_eaten = philo->start_time;
 	init_mutex_data_thread(thread);
 }
 

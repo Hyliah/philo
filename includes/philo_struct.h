@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:50:20 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 14:37:17 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:56:56 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,8 @@ typedef struct s_thread
 {
 	int				rep;
 	int				philo_number;
-	long			start_time;
 	long			last_eaten;
 	t_philo			*philo;
-	t_bool			is_odd;
 	pthread_t		philo_th;
 	pthread_mutex_t	*fork_left;
 	pthread_mutex_t	*fork_right;
@@ -56,8 +54,8 @@ typedef struct s_checker
 	t_philo			*philo;
 	pthread_t		checker_th;
 	int				nb_philo;
-	long			start_time;
 	t_bool			still_running;
+	t_bool			is_joined;
 	pthread_mutex_t	mutex_running;
 }	t_checker;
 
@@ -67,6 +65,7 @@ typedef struct s_philo
 	t_parsing	parsing;
 	t_thread	*thread;
 	t_mutex		mutex;
+	long		start_time;
 }	t_philo;
 
 #endif

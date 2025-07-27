@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 15:54:28 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 14:45:52 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/27 17:33:36 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,16 @@ long	get_current_time(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-long	start_program(t_philo *philo)
+void	start_program(t_philo *philo)
 {
 	long	now;
-	long	start_program;
 
 	now = get_current_time();
-	start_program = now + (((long)philo->parsing.nb_philo + 1) * 20);
-	return (start_program);
+	philo->start_time = now + (((long)philo->parsing.nb_philo + 1) * 20);
 }
 
 void	wait_start_program(long start_time)
 {
 	while (get_current_time() < start_time)
-		usleep(200);
+		usleep(500);
 }

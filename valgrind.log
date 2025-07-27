@@ -1,31 +1,75 @@
-==2380752== Memcheck, a memory error detector
-==2380752== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==2380752== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==2380752== Command: ./philo 3 200 200 200
-==2380752== Parent PID: 2374909
-==2380752== 
-==2380752== 
-==2380752== HEAP SUMMARY:
-==2380752==     in use at exit: 816 bytes in 3 blocks
-==2380752==   total heap usage: 9 allocs, 6 frees, 2,608 bytes allocated
-==2380752== 
-==2380752== 816 bytes in 3 blocks are possibly lost in loss record 1 of 1
-==2380752==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==2380752==    by 0x40147D9: calloc (rtld-malloc.h:44)
-==2380752==    by 0x40147D9: allocate_dtv (dl-tls.c:375)
-==2380752==    by 0x40147D9: _dl_allocate_tls (dl-tls.c:634)
-==2380752==    by 0x49097B4: allocate_stack (allocatestack.c:430)
-==2380752==    by 0x49097B4: pthread_create@@GLIBC_2.34 (pthread_create.c:647)
-==2380752==    by 0x10A28E: init_threads (threads_creation.c:31)
-==2380752==    by 0x109D20: philo_handler (philo_handler.c:22)
-==2380752==    by 0x1093B2: main (main.c:26)
-==2380752== 
-==2380752== LEAK SUMMARY:
-==2380752==    definitely lost: 0 bytes in 0 blocks
-==2380752==    indirectly lost: 0 bytes in 0 blocks
-==2380752==      possibly lost: 816 bytes in 3 blocks
-==2380752==    still reachable: 0 bytes in 0 blocks
-==2380752==         suppressed: 0 bytes in 0 blocks
-==2380752== 
-==2380752== For lists of detected and suppressed errors, rerun with: -s
-==2380752== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==2435191== Memcheck, a memory error detector
+==2435191== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==2435191== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==2435191== Command: ./philo 3 800 200 200 5
+==2435191== Parent PID: 2402432
+==2435191== 
+==2435191== 
+==2435191== Process terminating with default action of signal 2 (SIGINT)
+==2435191==    at 0x4905117: __futex_abstimed_wait_common64 (futex-internal.c:57)
+==2435191==    by 0x4905117: __futex_abstimed_wait_common (futex-internal.c:87)
+==2435191==    by 0x4905117: __futex_abstimed_wait_cancelable64 (futex-internal.c:139)
+==2435191==    by 0x490A623: __pthread_clockjoin_ex (pthread_join_common.c:105)
+==2435191==    by 0x10A474: join_checker (in /home/hlichten/Documents/philo/philo)
+==2435191==    by 0x10952F: exit_program (in /home/hlichten/Documents/philo/philo)
+==2435191==    by 0x1093C5: main (main.c:28)
+==2435191== 
+==2435191== HEAP SUMMARY:
+==2435191==     in use at exit: 2,496 bytes in 7 blocks
+==2435191==   total heap usage: 7 allocs, 0 frees, 2,496 bytes allocated
+==2435191== 
+==2435191== 120 bytes in 1 blocks are still reachable in loss record 1 of 5
+==2435191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2435191==    by 0x10A4E7: malloc_mutex_fork (mutex_fork_data.c:21)
+==2435191==    by 0x109391: main (main.c:24)
+==2435191== 
+==2435191== 264 bytes in 1 blocks are still reachable in loss record 2 of 5
+==2435191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2435191==    by 0x109B75: philo_handler (philo_handler.c:19)
+==2435191==    by 0x1093A0: main (main.c:25)
+==2435191== 
+==2435191== 272 bytes in 1 blocks are possibly lost in loss record 3 of 5
+==2435191==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2435191==    by 0x40147D9: calloc (rtld-malloc.h:44)
+==2435191==    by 0x40147D9: allocate_dtv (dl-tls.c:375)
+==2435191==    by 0x40147D9: _dl_allocate_tls (dl-tls.c:634)
+==2435191==    by 0x49097B4: allocate_stack (allocatestack.c:430)
+==2435191==    by 0x49097B4: pthread_create@@GLIBC_2.34 (pthread_create.c:647)
+==2435191==    by 0x109C71: init_checker (in /home/hlichten/Documents/philo/philo)
+==2435191==    by 0x109BD2: philo_handler (philo_handler.c:26)
+==2435191==    by 0x1093A0: main (main.c:25)
+==2435191== 
+==2435191== 816 bytes in 3 blocks are possibly lost in loss record 4 of 5
+==2435191==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2435191==    by 0x40147D9: calloc (rtld-malloc.h:44)
+==2435191==    by 0x40147D9: allocate_dtv (dl-tls.c:375)
+==2435191==    by 0x40147D9: _dl_allocate_tls (dl-tls.c:634)
+==2435191==    by 0x49097B4: allocate_stack (allocatestack.c:430)
+==2435191==    by 0x49097B4: pthread_create@@GLIBC_2.34 (pthread_create.c:647)
+==2435191==    by 0x10A15B: init_threads (threads_creation.c:31)
+==2435191==    by 0x109BB8: philo_handler (philo_handler.c:23)
+==2435191==    by 0x1093A0: main (main.c:25)
+==2435191== 
+==2435191== 1,024 bytes in 1 blocks are still reachable in loss record 5 of 5
+==2435191==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2435191==    by 0x48F2BA3: _IO_file_doallocate (filedoalloc.c:101)
+==2435191==    by 0x4901CDF: _IO_doallocbuf (genops.c:347)
+==2435191==    by 0x4900F5F: _IO_file_overflow@@GLIBC_2.2.5 (fileops.c:744)
+==2435191==    by 0x48FF6D4: _IO_new_file_xsputn (fileops.c:1243)
+==2435191==    by 0x48FF6D4: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==2435191==    by 0x48E914C: outstring_func (vfprintf-internal.c:239)
+==2435191==    by 0x48E914C: __vfprintf_internal (vfprintf-internal.c:1263)
+==2435191==    by 0x48D479E: printf (printf.c:33)
+==2435191==    by 0x10A3F3: join_threads (in /home/hlichten/Documents/philo/philo)
+==2435191==    by 0x109518: exit_program (in /home/hlichten/Documents/philo/philo)
+==2435191==    by 0x1093C5: main (main.c:28)
+==2435191== 
+==2435191== LEAK SUMMARY:
+==2435191==    definitely lost: 0 bytes in 0 blocks
+==2435191==    indirectly lost: 0 bytes in 0 blocks
+==2435191==      possibly lost: 1,088 bytes in 4 blocks
+==2435191==    still reachable: 1,408 bytes in 3 blocks
+==2435191==         suppressed: 0 bytes in 0 blocks
+==2435191== 
+==2435191== For lists of detected and suppressed errors, rerun with: -s
+==2435191== ERROR SUMMARY: 2 errors from 2 contexts (suppressed: 0 from 0)
