@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_life.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 20:07:53 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:38:45 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,12 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 
 	lock_fork_msg(thread, print);
 	print_msg(thread, print, "is eating");
-	pthread_mutex_lock(&thread->data_access);
-
-
-	// pthread_mutex_lock(print);
-	// printf("Philo %d data_access %p\n", thread->philo_number, &thread->data_access);
-	// printf("Philo %d fork left %p\n", thread->philo_number, thread->fork_left);
-	// printf("Philo %d fork right %p\n", thread->philo_number, thread->fork_right);
-	// pthread_mutex_unlock(print);
-	
-	
+	pthread_mutex_lock(&thread->philo->checker.mutex_running);
 	thread->last_eaten = get_current_time();
 	if (thread->rep > 0)
 		thread->rep--;
 	time_eat = thread->philo->parsing.time_eat;
-	pthread_mutex_unlock(&thread->data_access);
+	pthread_mutex_unlock(&thread->philo->checker.mutex_running);
 	secure_usleep(time_eat);
 	pthread_mutex_unlock(thread->fork_left);
 	pthread_mutex_unlock(thread->fork_right);

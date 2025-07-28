@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_life.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 20:58:14 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/28 17:40:04 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,6 @@ void	*checker_life(void *checker_arg)
 		}
 		usleep(500);
 	}
-	while (is_joined(checker->philo) == FALSE)
-		usleep(500);
-	pthread_mutex_unlock(&checker->philo->mutex.print_lock);
 	return (NULL);
 }
 
@@ -55,21 +52,19 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print)
 	if (!thread || !thread->philo)
 		return (FALSE);
 	now = get_current_time();
-
-	// pthread_mutex_lock(print);
-	// 	printf("Philo%d is_dead data_access %p\n",thread->philo_number, &thread->data_access);
-	// pthread_mutex_unlock(print);
-	
-	pthread_mutex_lock(&thread->data_access);
+	pthread_mutex_lock(&thread->philo->checker.mutex_running);
 	time_to_die = (long)thread->philo->parsing.time_die;
 	last_eaten = thread->last_eaten;
-	pthread_mutex_unlock(&thread->data_access);
+	pthread_mutex_unlock(&thread->philo->checker.mutex_running);
 	if ((now - last_eaten) > time_to_die)
 	{
 		change_still_running(&thread->philo->checker);
 		timestamp = now - thread->philo->start_time;
 		pthread_mutex_lock(print);
 		printf("%lu %d died\n", timestamp, thread->philo_number);
+		while (is_joined(thread->philo) == FALSE)
+			usleep(500);
+		pthread_mutex_unlock(print);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -83,15 +78,18 @@ static t_bool	is_all_reps_done(t_philo *philo)
 	i = 0;
 	while (i < philo->parsing.nb_philo)
 	{
-		pthread_mutex_lock(&philo->thread[i].data_access);
+		pthread_mutex_lock(&philo->checker.mutex_running);
 		rep = philo->thread[i].rep;
-		pthread_mutex_unlock(&philo->thread[i].data_access);
+		pthread_mutex_unlock(&philo->checker.mutex_running);
 		if (rep > 0)
 			return (FALSE);
 		i++;
 	}
 	change_still_running(&philo->checker);
 	pthread_mutex_lock(&philo->mutex.print_lock);
+	while (is_joined(philo) == FALSE)
+		usleep(500);
+	pthread_mutex_unlock(&philo->mutex.print_lock);
 	return (TRUE);
 }
 
