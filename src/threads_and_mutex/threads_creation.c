@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 13:36:29 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:14:47 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	init_threads(t_philo *philo)
 	{
 		init_mutex_data_thread(&threads[i]);
 		fill_thread_struct(philo, &threads[i], i);
-		ret = pthread_create(&threads[i].philo_th, NULL, philo_life, &threads[i]); //malloc ici qui  n est pas detruit
+		ret = pthread_create(&threads[i].philo_th, NULL, philo_life, &threads[i]);
 		if (ret)
 		{
 			printf("Error: failed to join create %d (errno: %d)\n", i, ret);
@@ -59,7 +59,6 @@ static void	fill_thread_struct(t_philo *philo, t_thread *thread, int i)
 		thread->fork_right = &philo->mutex.forks[i];
 	}
 	thread->last_eaten = philo->start_time;
-	
 }
 
 static t_bool	is_odd(int nb)

@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:42:49 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 20:57:45 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:14:01 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_bool	malloc_mutex_fork(t_philo *philo)
 	while (i < nb_philo)
 	{
 		if (pthread_mutex_init(&philo->mutex.forks[i], NULL) != 0)
-			return (FALSE); // faire une fonction qui va free au milieu iykyk
+			return (FALSE);
 		i++;
 	}
 	return (TRUE);

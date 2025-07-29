@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_life.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/28 17:38:45 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:15:01 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*philo_life(void *thread_arg)
 		action_eat(thread, print);
 		action_sleep(thread, print);
 		print_msg(thread, print, "is thinking");
-			secure_usleep(100);
+		secure_usleep(100);
 		if (is_running(thread->philo) == FALSE)
 			break ;
 	}
