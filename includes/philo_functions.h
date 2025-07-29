@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 14:43:13 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:21:51 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	parsing_av_entry(t_philo *philo, int ac, char **av);
 /*THREADS & MUTEX*/
 t_bool	is_joined(t_philo *philo);
 t_bool	malloc_mutex_fork(t_philo *philo);
-t_bool	init_mutex_data_checker(t_philo *philo);
+t_bool	init_mutex_checker(t_philo *philo);
 int		init_threads(t_philo *philo);
 int		join_threads(t_philo *philo);
 int		join_checker(t_philo *philo);

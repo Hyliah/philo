@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:50:20 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 14:18:41 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:21:30 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_checker
 	t_bool			still_running;
 	t_bool			is_joined;
 	pthread_mutex_t	mutex_running;
+	pthread_mutex_t mutex_eaten;
 }	t_checker;
 
 typedef struct s_philo

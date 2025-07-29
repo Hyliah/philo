@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 16:16:53 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:34:41 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*checker_life(void *checker_arg)
 				break ;
 			i++;
 		}
-		usleep(500);
+		usleep(1500);
 	}
 	while (is_joined(checker->philo) == FALSE)
 		usleep(500);
@@ -53,10 +53,10 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print)
 	if (!thread || !thread->philo)
 		return (FALSE);
 	now = get_current_time();
-	pthread_mutex_lock(&thread->philo->checker.mutex_running);
+	pthread_mutex_lock(&thread->philo->checker.mutex_eaten);
 	time_to_die = (long)thread->philo->parsing.time_die;
 	last_eaten = thread->last_eaten;
-	pthread_mutex_unlock(&thread->philo->checker.mutex_running);
+	pthread_mutex_unlock(&thread->philo->checker.mutex_eaten);
 	if ((now - last_eaten) > time_to_die)
 	{
 		change_still_running(&thread->philo->checker);
