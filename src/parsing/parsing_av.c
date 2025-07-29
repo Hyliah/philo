@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_av.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:55:49 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/12 20:36:51 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:35:31 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-/* Parse les infos des entrées sur la structure parsing*/
-/* testee, all good */
 void	parsing_av_entry(t_philo *philo, int ac, char **av)
 {
 	philo->parsing.nb_philo = ft_atoi(av[1]);

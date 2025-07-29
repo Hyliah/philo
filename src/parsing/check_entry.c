@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_entry.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:07:48 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 22:34:46 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:35:26 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 static t_bool	is_numeric(char *str);
 
-/* 
-fonction check des infos donnees pour eviter les pb
-affiche un message en fonction
-verifiee, all good
-*/
 t_bool	is_entry_correct(int ac, char **av)
 {
 	int	i;

@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 20:53:28 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:36:29 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	init_threads(t_philo *philo)
 	nb_philo = philo->parsing.nb_philo;
 	while (i < nb_philo)
 	{
-		printf("thread[%d] %p\n", i, &threads[i]);
 		init_mutex_data_thread(&threads[i]);
 		fill_thread_struct(philo, &threads[i], i);
 		ret = pthread_create(&threads[i].philo_th, NULL, philo_life, &threads[i]); //malloc ici qui  n est pas detruit
