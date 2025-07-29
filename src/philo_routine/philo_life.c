@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 14:15:01 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:09:01 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,12 @@ void	*philo_life(void *thread_arg)
 	while (1)
 	{
 		action_eat(thread, print);
+		if (is_running(thread->philo) == FALSE)
+			break ;
 		action_sleep(thread, print);
+		if (is_running(thread->philo) == FALSE)
+			break ;
 		print_msg(thread, print, "is thinking");
-		secure_usleep(100);
 		if (is_running(thread->philo) == FALSE)
 			break ;
 	}

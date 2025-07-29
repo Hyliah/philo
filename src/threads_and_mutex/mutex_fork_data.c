@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:42:49 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 14:14:01 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:19:23 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,6 @@ t_bool	malloc_mutex_fork(t_philo *philo)
 			return (FALSE);
 		i++;
 	}
-	return (TRUE);
-}
-
-t_bool	init_mutex_data_thread(t_thread *thread)
-{
-	if (pthread_mutex_init(&thread->data_access, NULL) != 0)
-		return (FALSE);
 	return (TRUE);
 }
 

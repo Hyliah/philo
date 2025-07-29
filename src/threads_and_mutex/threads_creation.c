@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 14:14:47 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:23:37 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	init_threads(t_philo *philo)
 	nb_philo = philo->parsing.nb_philo;
 	while (i < nb_philo)
 	{
-		init_mutex_data_thread(&threads[i]);
 		fill_thread_struct(philo, &threads[i], i);
-		ret = pthread_create(&threads[i].philo_th, NULL, philo_life, &threads[i]);
+		ret = pthread_create(&threads[i].philo_th,
+				NULL, philo_life, &threads[i]);
 		if (ret)
 		{
 			printf("Error: failed to join create %d (errno: %d)\n", i, ret);

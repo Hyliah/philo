@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_life.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/28 17:40:04 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:16:53 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,16 @@ void	*checker_life(void *checker_arg)
 		i = 0;
 		while (i < checker->philo->parsing.nb_philo && checker->still_running)
 		{
-			if (checker->philo->parsing.is_rep
-				&& is_all_reps_done(checker->philo))
-				break ;
-			if (is_dead(&checker->philo->thread[i], print))
+			if (is_all_reps_done(checker->philo)
+				|| is_dead(&checker->philo->thread[i], print))
 				break ;
 			i++;
 		}
 		usleep(500);
 	}
+	while (is_joined(checker->philo) == FALSE)
+		usleep(500);
+	pthread_mutex_unlock(print);
 	return (NULL);
 }
 
@@ -62,9 +63,6 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print)
 		timestamp = now - thread->philo->start_time;
 		pthread_mutex_lock(print);
 		printf("%lu %d died\n", timestamp, thread->philo_number);
-		while (is_joined(thread->philo) == FALSE)
-			usleep(500);
-		pthread_mutex_unlock(print);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -76,6 +74,8 @@ static t_bool	is_all_reps_done(t_philo *philo)
 	int	rep;
 
 	i = 0;
+	if (philo->parsing.is_rep == FALSE)
+		return (FALSE);
 	while (i < philo->parsing.nb_philo)
 	{
 		pthread_mutex_lock(&philo->checker.mutex_running);
@@ -87,9 +87,6 @@ static t_bool	is_all_reps_done(t_philo *philo)
 	}
 	change_still_running(&philo->checker);
 	pthread_mutex_lock(&philo->mutex.print_lock);
-	while (is_joined(philo) == FALSE)
-		usleep(500);
-	pthread_mutex_unlock(&philo->mutex.print_lock);
 	return (TRUE);
 }
 

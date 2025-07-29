@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:32:48 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 18:12:16 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:19:36 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	join_threads(t_philo *philo)
 	i = 0;
 	while (i < philo->parsing.nb_philo)
 	{
-		pthread_mutex_destroy(&philo->thread[i].data_access);
 		ret = pthread_join(philo->thread[i].philo_th, NULL);
 		if (ret)
 		{
