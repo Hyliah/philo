@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/30 22:26:53 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 23:00:09 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print)
 	pthread_mutex_unlock(&thread->philo->checker.mutex_eaten);
 	if ((now - last_eaten) > time_to_die)
 	{
-		timestamp = now - thread->philo->start_time;
-		printf("%lu %d died\n", timestamp, thread->philo_number); //mettre message
 		change_still_running(&thread->philo->checker);
+		timestamp = now - thread->philo->start_time;
+		print_msg(thread, print, "died", TRUE);
 		return (TRUE);
 	}
 	return (FALSE);

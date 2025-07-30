@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/30 22:26:08 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:52:42 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	*philo_life(void *thread_arg)
 	{
 		action_eat(thread, print);
 		action_sleep(thread, print);
-		print_msg(thread, print, "is thinking");
-		usleep(50); //ptetre afaire un time to think
+		print_msg(thread, print, "is thinking", FALSE);
+		usleep(50);
 	}
 	return (NULL);
 }
@@ -39,7 +39,7 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 	long	time_eat;
 
 	lock_fork_msg(thread, print);
-	print_msg(thread, print, "is eating");
+	print_msg(thread, print, "is eating", FALSE);
 	pthread_mutex_lock(&thread->philo->checker.mutex_eaten);
 	thread->last_eaten = get_current_time();
 	time_eat = thread->philo->parsing.time_eat;
@@ -58,22 +58,29 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 static void	lock_fork_msg(t_thread *thread, pthread_mutex_t *print)
 {
 	pthread_mutex_lock(thread->fork_right);
-	print_msg(thread, print, "has taken a fork");
+	print_msg(thread, print, "has taken a fork", FALSE);
 	pthread_mutex_lock(thread->fork_left);
-	print_msg(thread, print, "has taken a fork");
+	print_msg(thread, print, "has taken a fork", FALSE);
 }
 
 static void	action_sleep(t_thread *thread, pthread_mutex_t *print)
 {
-	print_msg(thread, print, "is sleeping");
+	print_msg(thread, print, "is sleeping", FALSE);
 	secure_usleep(thread->philo->parsing.time_sleep);
 }
 
-void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg)
+void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg, t_bool is_dead)
 {
 	long	timestamp;
 
 	pthread_mutex_lock(print);
+	if (is_dead)
+	{
+		timestamp = get_current_time() - thread->philo->start_time;
+		printf("%lu %d %s\n", timestamp, thread->philo_number, msg);
+		pthread_mutex_unlock(print);
+		return ;
+	}
 	if (is_running(thread->philo) == FALSE)
 	{
 		pthread_mutex_unlock(print);

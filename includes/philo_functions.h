@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/30 22:24:15 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:54:30 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_bool	init_mutex_checker(t_philo *philo);
 int		init_threads(t_philo *philo);
 int		join_threads(t_philo *philo);
 int		join_checker(t_philo *philo);
-void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg);
+void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg, t_bool is_dead);
 /*PHILO_ROUTINE*/
 void	*philo_life(void *thread);
 int		philo_handler(t_philo *philo);

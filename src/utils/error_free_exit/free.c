@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlichten <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:29:25 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/21 17:51:34 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:54:22 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,3 +23,6 @@ void	unfructuous_malloc(t_philo *philo)
 	free_all(philo);
 	exit(EXIT_FAILURE);
 }
+
+
+//faire ca meiux au cas ou des malloc chient dans la colle

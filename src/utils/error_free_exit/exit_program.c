@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 23:19:06 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/30 22:24:58 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:50:09 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	exit_program(t_philo *philo)
 	int	i;
 
 	join_threads(philo);
-	pthread_mutex_unlock(&philo->checker.mutex_running);
 	join_checker(philo);
 	pthread_mutex_destroy(&philo->checker.mutex_running);
 	pthread_mutex_destroy(&philo->checker.mutex_eaten);
