@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:32:48 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 14:19:36 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:25:12 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,4 @@ int	join_checker(t_philo *philo)
 		return (ret);
 	}
 	return (0);
-}
-
-t_bool	is_joined(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->checker.mutex_running);
-	if (philo->checker.is_joined == FALSE)
-	{
-		pthread_mutex_unlock(&philo->checker.mutex_running);
-		return (FALSE);
-	}
-	pthread_mutex_unlock(&philo->checker.mutex_running);
-	return (TRUE);
 }

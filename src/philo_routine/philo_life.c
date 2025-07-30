@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 16:26:01 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:26:08 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	action_eat(t_thread *thread, pthread_mutex_t *print);
 static void	lock_fork_msg(t_thread *thread, pthread_mutex_t *print);
 static void	action_sleep(t_thread *thread, pthread_mutex_t *print);
-static void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg);
 
 void	*philo_life(void *thread_arg)
 {
@@ -25,17 +24,12 @@ void	*philo_life(void *thread_arg)
 	thread = (t_thread *)thread_arg;
 	print = &thread->philo->mutex.print_lock;
 	wait_start_program(thread->philo->start_time);
-	while (1)
+	while (is_running(thread->philo))
 	{
 		action_eat(thread, print);
-		if (is_running(thread->philo) == FALSE)
-			break ;
 		action_sleep(thread, print);
-		if (is_running(thread->philo) == FALSE)
-			break ;
 		print_msg(thread, print, "is thinking");
-		if (is_running(thread->philo) == FALSE)
-			break ;
+		usleep(50); //ptetre afaire un time to think
 	}
 	return (NULL);
 }
@@ -46,15 +40,17 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 
 	lock_fork_msg(thread, print);
 	print_msg(thread, print, "is eating");
-	pthread_mutex_lock(&thread->philo->checker.mutex_running);
-	if (thread->rep > 0)
-	thread->rep--;
-	pthread_mutex_unlock(&thread->philo->checker.mutex_running);
 	pthread_mutex_lock(&thread->philo->checker.mutex_eaten);
 	thread->last_eaten = get_current_time();
 	time_eat = thread->philo->parsing.time_eat;
 	pthread_mutex_unlock(&thread->philo->checker.mutex_eaten);
 	secure_usleep(time_eat);
+	if (is_running(thread->philo))
+	{
+		pthread_mutex_lock(&thread->philo->checker.mutex_running);
+		thread->rep++;
+		pthread_mutex_unlock(&thread->philo->checker.mutex_running);
+	}
 	pthread_mutex_unlock(thread->fork_left);
 	pthread_mutex_unlock(thread->fork_right);
 }
@@ -73,15 +69,17 @@ static void	action_sleep(t_thread *thread, pthread_mutex_t *print)
 	secure_usleep(thread->philo->parsing.time_sleep);
 }
 
-static void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg)
+void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg)
 {
 	long	timestamp;
 
-	if (is_running(thread->philo))
+	pthread_mutex_lock(print);
+	if (is_running(thread->philo) == FALSE)
 	{
-		pthread_mutex_lock(print);
-		timestamp = get_current_time() - thread->philo->start_time;
-		printf("%lu %d %s\n", timestamp, thread->philo_number, msg);
 		pthread_mutex_unlock(print);
+		return ;
 	}
+	timestamp = get_current_time() - thread->philo->start_time;
+	printf("%lu %d %s\n", timestamp, thread->philo_number, msg);
+	pthread_mutex_unlock(print);
 }

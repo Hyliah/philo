@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 17:48:01 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/27 17:22:20 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:13:10 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,9 @@ void	secure_usleep(long time)
 
 	finish = get_current_time() + time;
 	while (get_current_time() < finish)
+	{
+		if (is_running == FALSE)
+			break;
 		usleep(500);
+	}
 }

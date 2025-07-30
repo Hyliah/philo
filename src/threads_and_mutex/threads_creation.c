@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 15:12:59 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 14:23:37 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 21:49:31 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	fill_thread_struct(t_philo *philo, t_thread *thread, int i)
 	nb_philo = philo->parsing.nb_philo;
 	thread->philo = philo;
 	thread->philo_number = i + 1;
-	thread->rep = philo->parsing.rep;
+	thread->rep = 0;
 	if (is_odd(i + 1))
 	{
 		thread->fork_left = &philo->mutex.forks[i];

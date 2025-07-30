@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/14 16:40:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 16:34:41 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/07/30 22:26:53 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,15 @@ void	*checker_life(void *checker_arg)
 	while (is_running(checker->philo))
 	{
 		i = 0;
-		while (i < checker->philo->parsing.nb_philo && checker->still_running)
+		while (i < checker->philo->parsing.nb_philo)
 		{
-			if (is_all_reps_done(checker->philo)
-				|| is_dead(&checker->philo->thread[i], print))
+			if (is_dead(&checker->philo->thread[i], print) ||
+				is_all_reps_done(checker->philo))
 				break ;
 			i++;
 		}
-		usleep(1500);
-	}
-	while (is_joined(checker->philo) == FALSE)
 		usleep(500);
-	pthread_mutex_unlock(print);
+	}
 	return (NULL);
 }
 
@@ -59,10 +56,9 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print)
 	pthread_mutex_unlock(&thread->philo->checker.mutex_eaten);
 	if ((now - last_eaten) > time_to_die)
 	{
-		change_still_running(&thread->philo->checker);
 		timestamp = now - thread->philo->start_time;
-		pthread_mutex_lock(print);
-		printf("%lu %d died\n", timestamp, thread->philo_number);
+		printf("%lu %d died\n", timestamp, thread->philo_number); //mettre message
+		change_still_running(&thread->philo->checker);
 		return (TRUE);
 	}
 	return (FALSE);
@@ -70,8 +66,8 @@ static t_bool	is_dead(t_thread *thread, pthread_mutex_t *print)
 
 static t_bool	is_all_reps_done(t_philo *philo)
 {
-	int	i;
-	int	rep;
+	int		i;
+	int		rep;
 
 	i = 0;
 	if (philo->parsing.is_rep == FALSE)
@@ -81,24 +77,11 @@ static t_bool	is_all_reps_done(t_philo *philo)
 		pthread_mutex_lock(&philo->checker.mutex_running);
 		rep = philo->thread[i].rep;
 		pthread_mutex_unlock(&philo->checker.mutex_running);
-		if (rep > 0)
+		if (rep < philo->parsing.rep)
 			return (FALSE);
 		i++;
 	}
 	change_still_running(&philo->checker);
-	pthread_mutex_lock(&philo->mutex.print_lock);
-	return (TRUE);
-}
-
-t_bool	is_running(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->checker.mutex_running);
-	if (philo->checker.still_running == FALSE)
-	{
-		pthread_mutex_unlock(&philo->checker.mutex_running);
-		return (FALSE);
-	}
-	pthread_mutex_unlock(&philo->checker.mutex_running);
 	return (TRUE);
 }
 
@@ -107,4 +90,14 @@ static void	change_still_running(t_checker *checker)
 	pthread_mutex_lock(&checker->mutex_running);
 	checker->still_running = FALSE;
 	pthread_mutex_unlock(&checker->mutex_running);
+}
+
+t_bool	is_running(t_philo *philo)
+{
+	t_bool	is_running;
+
+	pthread_mutex_lock(&philo->checker.mutex_running);
+	is_running = philo->checker.still_running;
+	pthread_mutex_unlock(&philo->checker.mutex_running);
+	return (is_running);
 }
