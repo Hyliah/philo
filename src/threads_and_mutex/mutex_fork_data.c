@@ -6,11 +6,13 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:42:49 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/30 22:25:51 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/08/01 18:34:55 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	destroy_mid_init(t_philo *philo, int i);
 
 t_bool	malloc_mutex_fork(t_philo *philo)
 {
@@ -25,17 +27,18 @@ t_bool	malloc_mutex_fork(t_philo *philo)
 	while (i < nb_philo)
 	{
 		if (pthread_mutex_init(&philo->mutex.forks[i], NULL) != 0)
-			return (FALSE);
+			return (destroy_mid_init(philo, i), FALSE);
 		i++;
 	}
 	return (TRUE);
 }
 
-t_bool	init_mutex_checker(t_philo *philo)
+static void	destroy_mid_init(t_philo *philo, int i)
 {
-	if (pthread_mutex_init(&philo->checker.mutex_running, NULL) != 0)
-		return (FALSE);
-	if (pthread_mutex_init(&philo->checker.mutex_eaten, NULL) != 0)
-		return (FALSE);
-	return (TRUE);
+	while (i >= 0)
+	{
+		pthread_mutex_destroy(&philo->mutex.forks[i]);
+		i--;
+	}
+	free(philo->mutex.forks);
 }

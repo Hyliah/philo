@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 22:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/30 22:54:30 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/08/01 15:13:19 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_bool	init_mutex_checker(t_philo *philo);
 int		init_threads(t_philo *philo);
 int		join_threads(t_philo *philo);
 int		join_checker(t_philo *philo);
-void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg, t_bool is_dead);
+void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg,
+			t_bool is_dead);
 /*PHILO_ROUTINE*/
 void	*philo_life(void *thread);
 int		philo_handler(t_philo *philo);
@@ -36,7 +37,7 @@ char	*ft_itoa(int nbr);
 long	get_current_time(void);
 int		ft_atoi(const char *str);
 void	free_all(t_philo *philo);
-void	secure_usleep(long time);
+void	secure_usleep(long time, t_philo *philo);
 void	init_struct(t_philo *philo);
 void	ft_putstr_fd(char *s, int fd);
 void	start_program(t_philo *philo);

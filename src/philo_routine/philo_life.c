@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 16:02:15 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/30 22:52:42 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/08/01 18:31:23 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*philo_life(void *thread_arg)
 		action_eat(thread, print);
 		action_sleep(thread, print);
 		print_msg(thread, print, "is thinking", FALSE);
-		usleep(50);
+		secure_usleep(30, thread->philo);
 	}
 	return (NULL);
 }
@@ -40,16 +40,16 @@ static void	action_eat(t_thread *thread, pthread_mutex_t *print)
 
 	lock_fork_msg(thread, print);
 	print_msg(thread, print, "is eating", FALSE);
-	pthread_mutex_lock(&thread->philo->checker.mutex_eaten);
+	pthread_mutex_lock(&thread->mutex_eat);
 	thread->last_eaten = get_current_time();
 	time_eat = thread->philo->parsing.time_eat;
-	pthread_mutex_unlock(&thread->philo->checker.mutex_eaten);
-	secure_usleep(time_eat);
+	pthread_mutex_unlock(&thread->mutex_eat);
+	secure_usleep(time_eat, thread->philo);
 	if (is_running(thread->philo))
 	{
-		pthread_mutex_lock(&thread->philo->checker.mutex_running);
+		pthread_mutex_lock(&thread->mutex_eat);
 		thread->rep++;
-		pthread_mutex_unlock(&thread->philo->checker.mutex_running);
+		pthread_mutex_unlock(&thread->mutex_eat);
 	}
 	pthread_mutex_unlock(thread->fork_left);
 	pthread_mutex_unlock(thread->fork_right);
@@ -66,10 +66,11 @@ static void	lock_fork_msg(t_thread *thread, pthread_mutex_t *print)
 static void	action_sleep(t_thread *thread, pthread_mutex_t *print)
 {
 	print_msg(thread, print, "is sleeping", FALSE);
-	secure_usleep(thread->philo->parsing.time_sleep);
+	secure_usleep(thread->philo->parsing.time_sleep, thread->philo);
 }
 
-void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg, t_bool is_dead)
+void	print_msg(t_thread *thread, pthread_mutex_t *print, char *msg,
+			t_bool is_dead)
 {
 	long	timestamp;
 
