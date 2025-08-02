@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 23:07:48 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/30 21:13:31 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/08/01 15:17:56 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static t_bool	is_zero(char *av_i)
 		return (TRUE);
 	return (FALSE);
 }
+
 static t_bool	is_numeric(char *str)
 {
 	int	i;
@@ -68,7 +69,7 @@ t_bool	is_single_thread(char **av)
 	else
 	{
 		printf("0 1 has taken a fork\n");
-		secure_usleep(time_to_die);
+		usleep(time_to_die * 1000);
 		printf("%d 1 died", (time_to_die + 1));
 	}
 	return (TRUE);

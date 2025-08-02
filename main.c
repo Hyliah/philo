@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 21:30:06 by hlichten          #+#    #+#             */
-/*   Updated: 2025/07/29 14:36:22 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/08/01 15:21:04 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	malloc_mutex_fork(&philo);
 	ret = philo_handler(&philo);
 	if (ret)
-		return (1);
+		return (exit_program(&philo), 1);
 	exit_program(&philo);
 	return (0);
 }
