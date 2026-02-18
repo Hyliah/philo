@@ -11,7 +11,7 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Language-C-pink.svg" />
-  <img src="https://img.shields.io/badge/Status-Work in Progress-violet" />
+  <img src="https://img.shields.io/badge/Status-Completed : 100-violet" />
   <img src="https://img.shields.io/badge/School-42%20Lausanne-blueviolet" />
 </p>
 
